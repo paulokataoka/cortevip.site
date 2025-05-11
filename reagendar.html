@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reagendar ou Cancelar - CorteVip</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="container">
+    <h1 class="logo">Corte<span>Vip</span></h1>
+    <p class="subtitle">Reagende ou solicite cancelamento de seu horário</p>
+
+    <form id="reagendar-form" class="form">
+      <div class="form-group">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required />
+      </div>
+
+      <div class="form-group">
+        <label for="celular">Celular:</label>
+        <input type="tel" id="celular" name="celular" placeholder="(XX) XXXXX-XXXX" required />
+      </div>
+
+      <div class="form-group">
+        <label for="mensagem">Descrição do pedido:</label>
+        <textarea id="mensagem" name="mensagem" rows="4" placeholder="Deseja reagendar para outro dia? Cancelar seu agendamento? Informe aqui..." required></textarea>
+      </div>
+
+      <div class="button-group">
+        <button type="submit" class="btn primary">Enviar Solicitação</button>
+        <a href="index.html" class="btn secondary">Voltar ao Início</a>
+      </div>
+
+      <p id="mensagem-sucesso"></p>
+    </form>
+  </main>
+
+  <script src="reagendar.js"></script>
+</body>
+</html>
+
+
