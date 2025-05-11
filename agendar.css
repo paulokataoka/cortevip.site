@@ -128,5 +128,26 @@ footer {
     color: #aaa;
     font-size: 0.9rem;
 }
+.voltar-inicio {
+  text-align: center;
+  margin: 2rem 0 1rem;
+}
+
+.btn-voltar {
+  display: inline-block;
+  padding: 0.7rem 1.5rem;
+  background-color: transparent;
+  color: var(--green, #32cd32);
+  border: 2px solid var(--green, #32cd32);
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-voltar:hover {
+  background-color: var(--green, #32cd32);
+  color: #fff;
+}
 
 
