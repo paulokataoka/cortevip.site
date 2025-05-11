@@ -27,3 +27,37 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   */
 });
+// Efeito de digitação automática no subtítulo
+const frases = [
+  "Agende seu corte com facilidade.",
+  "Seu estilo começa aqui.",
+  "CorteVip. Simples. Rápido. Profissional."
+];
+
+let i = 0; // índice da frase
+let j = 0; // índice da letra
+let apagando = false;
+const speed = 100;
+const delayEntreFrases = 2000;
+const typedText = document.getElementById("typed-text");
+
+function digitar() {
+  const fraseAtual = frases[i];
+  if (!apagando && j <= fraseAtual.length) {
+    typedText.textContent = fraseAtual.substring(0, j++);
+    setTimeout(digitar, speed);
+  } else if (apagando && j >= 0) {
+    typedText.textContent = fraseAtual.substring(0, j--);
+    setTimeout(digitar, speed / 2);
+  } else {
+    apagando = !apagando;
+    if (!apagando) {
+      i = (i + 1) % frases.length;
+    }
+    setTimeout(digitar, delayEntreFrases);
+  }
+}
+
+// Iniciar animação após o carregamento
+window.addEventListener("DOMContentLoaded", digitar);
+
