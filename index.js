@@ -47,18 +47,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  digitar(); // Iniciar animação após o carregamento
-
-  // Efeito de clique ou som opcional (ativar se desejar)
-  /*
-  const buttons = document.querySelectorAll(".btn");
-  const clickSound = new Audio("click.mp3");
-  buttons.forEach((btn) => {
-    btn.addEventListener("mouseenter", () => {
-      clickSound.play();
-    });
-  });
-  */
+  digitar(); // Iniciar a digitação após o carregamento
 });
+
 
 
