@@ -7,7 +7,7 @@
 
 html, body {
   height: 100%;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   transition: background-color 0.3s, color 0.3s;
 }
 
@@ -17,6 +17,7 @@ body {
   align-items: center;
   background-color: var(--bg);
   color: var(--text);
+  padding: 1rem;
 }
 
 /* Tema dinâmico com suporte a modo escuro/claro */
@@ -35,7 +36,6 @@ body {
   --btn-secondary-text: var(--green);
 }
 
-/* Modo escuro automático */
 @media (prefers-color-scheme: dark) {
   :root {
     --bg: #0d0d0d;
@@ -51,7 +51,10 @@ body {
 /* Container principal */
 .container {
   text-align: center;
-  padding: 2rem;
+  padding: 2rem 1rem;
+  max-width: 480px;
+  width: 100%;
+  background-color: transparent;
 }
 
 /* Logo estilizada */
@@ -69,47 +72,10 @@ body {
 .subtitle {
   font-size: 1.2rem;
   margin-bottom: 2rem;
-  opacity: 0.8;
+  opacity: 0.85;
 }
 
-/* Botões */
-.button-group {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.btn {
-  text-decoration: none;
-  font-size: 1rem;
-  font-weight: 600;
-  padding: 0.8rem 2rem;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-}
-
-/* Botão primário */
-.btn.primary {
-  background-color: var(--btn-bg);
-  color: var(--btn-text);
-  border: none;
-}
-
-.btn.primary:hover {
-  background-color: #28a428;
-}
-
-/* Botão secundário */
-.btn.secondary {
-  border: 2px solid var(--btn-secondary-border);
-  background-color: var(--btn-secondary-bg);
-  color: var(--btn-secondary-text);
-}
-
-.btn.secondary:hover {
-  background-color: var(--green);
-  color: var(--white);
-}
+/* Efeito de digitação */
 .cursor {
   display: inline-block;
   color: var(--green, #32cd32);
@@ -119,6 +85,65 @@ body {
 @keyframes blink {
   to {
     visibility: hidden;
+  }
+}
+
+/* Botões */
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.btn {
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.8rem 2rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+/* Botão primário */
+.btn.primary {
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
+  border: none;
+}
+
+.btn.primary:hover,
+.btn.primary:focus {
+  background-color: #28a428;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(50, 205, 50, 0.3);
+}
+
+/* Botão secundário */
+.btn.secondary {
+  border: 2px solid var(--btn-secondary-border);
+  background-color: var(--btn-secondary-bg);
+  color: var(--btn-secondary-text);
+}
+
+.btn.secondary:hover,
+.btn.secondary:focus {
+  background-color: var(--green);
+  color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(50, 205, 50, 0.3);
+}
+
+/* Responsividade para telas maiores */
+@media (min-width: 600px) {
+  .button-group {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .btn {
+    min-width: 160px;
   }
 }
 
