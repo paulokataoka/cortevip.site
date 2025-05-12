@@ -149,5 +149,43 @@ footer {
   background-color: var(--green, #32cd32);
   color: #fff;
 }
+/* Estilos para o banner de cookies */
+.cookie-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--bg);
+  color: var(--text);
+  text-align: center;
+  padding: 1rem;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 9999;
+  display: none;
+}
+
+.cookie-banner p {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.cookie-banner a {
+  color: var(--green);
+  text-decoration: none;
+}
+
+.cookie-banner button {
+  margin-top: 1rem;
+  font-size: 1rem;
+  padding: 0.7rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cookie-banner button:hover {
+  background-color: #28a428;
+}
+
 
 
