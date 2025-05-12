@@ -46,6 +46,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+// Verifica se o usuário já aceitou ou recusou os cookies
+if (!localStorage.getItem('cookies-accepted')) {
+  document.getElementById('cookie-banner').style.display = 'block';
+}
+
+// Quando o usuário aceita os cookies
+document.getElementById('accept-cookies').addEventListener('click', function() {
+  localStorage.setItem('cookies-accepted', 'true');
+  document.getElementById('cookie-banner').style.display = 'none';
+});
+
+// Quando o usuário recusa os cookies
+document.getElementById('decline-cookies').addEventListener('click', function() {
+  localStorage.setItem('cookies-accepted', 'false');
+  document.getElementById('cookie-banner').style.display = 'none';
+});
+
 
 
 
