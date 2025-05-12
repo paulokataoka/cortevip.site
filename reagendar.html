@@ -3,41 +3,35 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Reagendar ou Cancelar - CorteVip</title>
+  <title>CorteVip | Reagendar ou Cancelar</title>
   <link rel="stylesheet" href="reagendar.css" />
 </head>
 <body>
   <main class="container">
     <h1 class="logo">Corte<span>Vip</span></h1>
-    <p class="subtitle">Reagende ou solicite cancelamento de seu horário</p>
+    <p class="subtitle">Reagende ou solicite o cancelamento do seu horário</p>
 
-    <form id="reagendar-form" class="form">
-      <div class="form-group">
-        <label for="nome">Nome:</label>
-        <input type="text" id="nome" name="nome" required />
-      </div>
+    <form id="reagendar-form">
+      <label for="nome">Nome completo</label>
+      <input type="text" id="nome" name="nome" placeholder="Seu nome" required />
 
-      <div class="form-group">
-        <label for="celular">Celular:</label>
-        <input type="tel" id="celular" name="celular" placeholder="(XX) XXXXX-XXXX" required />
-      </div>
+      <label for="celular">Celular</label>
+      <input type="tel" id="celular" name="celular" placeholder="(XX) XXXXX-XXXX" required />
 
-      <div class="form-group">
-        <label for="mensagem">Descrição do pedido:</label>
-        <textarea id="mensagem" name="mensagem" rows="4" placeholder="Deseja reagendar para outro dia? Cancelar seu agendamento? Informe aqui..." required></textarea>
-      </div>
+      <label for="mensagem">Descrição do pedido</label>
+      <textarea id="mensagem" name="mensagem" rows="4" placeholder="Ex: Gostaria de reagendar para sexta-feira às 15h." required></textarea>
 
-      <div class="button-group">
-        <button type="submit" class="btn primary">Enviar Solicitação</button>
-        <a href="index.html" class="btn secondary">Voltar ao Início</a>
-      </div>
+      <button type="submit">Enviar Solicitação</button>
 
       <p id="mensagem-sucesso"></p>
     </form>
+
+    <a href="index.html" class="voltar">← Voltar para a página inicial</a>
   </main>
 
   <script src="reagendar.js"></script>
 </body>
 </html>
+
 
 
