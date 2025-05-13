@@ -29,15 +29,21 @@
                     <input type="tel" id="celular" name="celular" placeholder="(XX) XXXXX-XXXX" required />
                 </div>
 
-               <div class="form-group">
-                    <label for="barbearia">Barbearia Kataoka´s - Centro - SP </label>
-                    <select id="barbearia" name="barbear
+                <div class="form-group">
+                    <label for="barbearia">Barbearia:</label>
+                    <select id="barbearia" name="barbearia" required>
+                        <option value="">Selecione a barbearia...</option>
+                        <option value="kataoka-centro">Kataoka's - Centro - SP</option>
+                        <!-- Outras barbearias podem ser adicionadas aqui -->
+                    </select>
+                </div>
 
                 <div class="form-group">
                     <label for="barbeiro">Barbeiro:</label>
                     <select id="barbeiro" name="barbeiro" required>
                         <option value="">Selecione o barbeiro...</option>
                         <option value="Paulo">Paulo Kataoka</option>
+                        <!-- Outros barbeiros podem ser adicionados aqui -->
                     </select>
                 </div>
 
@@ -58,9 +64,9 @@
                     <label for="servico">Serviço:</label>
                     <select id="servico" name="servico" required>
                         <option value="">Selecione...</option>
-                        <option value="corte">Corte de Cabelo:R$89,99</option>
-                        <option value="barba">Barba:R$64,90</option>
-                        <option value="combo">Corte + Barba:R$149,90</option>
+                        <option value="corte">Corte de Cabelo: R$89,99</option>
+                        <option value="barba">Barba: R$64,90</option>
+                        <option value="combo">Corte + Barba: R$149,90</option>
                         <option value="outro">Outro</option>
                     </select>
                 </div>
