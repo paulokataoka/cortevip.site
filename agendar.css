@@ -182,12 +182,4 @@ footer {
     padding: 0.7rem 1.5rem;
     border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.cookie-banner button:hover {
-    background-color: #28a428;
-}
-
-
-
+    transition: background-color 
