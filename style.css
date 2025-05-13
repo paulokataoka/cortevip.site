@@ -149,8 +149,9 @@ body {
 /* Política de Cookies - invisível mas com destaque via sombra */
 .cookie-policy {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   max-width: 320px;
   background-color: rgba(255, 255, 255, 0); /* invisível */
   color: transparent;
