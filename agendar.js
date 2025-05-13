@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const nome = document.getElementById('nome').value.trim();
         const celular = document.getElementById('celular').value.trim();
-        const unidade = document.getElementById('unidade').value;
+        const endereco = document.getElementById("endereco").value;
         const barbeiro = document.getElementById('barbeiro').value;
         const data = document.getElementById('data').value;
         const hora = document.getElementById('hora').value;
