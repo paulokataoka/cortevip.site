@@ -34,7 +34,6 @@
                     <select id="barbearia" name="barbearia" required>
                         <option value="">Selecione a barbearia...</option>
                         <option value="kataoka-centro">Kataoka's - Centro - SP</option>
-                        <!-- Outras barbearias podem ser adicionadas aqui -->
                     </select>
                 </div>
 
@@ -43,7 +42,6 @@
                     <select id="barbeiro" name="barbeiro" required>
                         <option value="">Selecione o barbeiro...</option>
                         <option value="Paulo">Paulo Kataoka</option>
-                        <!-- Outros barbeiros podem ser adicionados aqui -->
                     </select>
                 </div>
 
@@ -54,10 +52,7 @@
 
                 <div class="form-group">
                     <label for="hora">Hora:</label>
-                    <select id="hora" name="hora" required>
-                        <option value="">Selecione o horário...</option>
-                        <!-- Carregado via JavaScript -->
-                    </select>
+                    <input type="time" id="hora" name="hora" required />
                 </div>
 
                 <div class="form-group">
@@ -84,7 +79,6 @@
     <!-- Contatar Suporte -->
     <div class="contatar-suporte">
         <a href="https://wa.me/seunumero" target="_blank">Contatar Suporte</a>
-        <!-- Botão para voltar ao início -->
         <div class="voltar-inicio">
             <a href="index.html" class="btn-voltar">← Voltar para Início</a>
         </div>
@@ -107,4 +101,5 @@
     <script src="agendar.js"></script>
 </body>
 </html>
+
 
