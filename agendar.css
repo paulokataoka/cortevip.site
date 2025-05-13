@@ -67,6 +67,13 @@ body {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    font-size: 1rem;
+}
+
+.agendamento-form input:focus,
+.agendamento-form select:focus {
+    border-color: #28a745;
+    outline: none;
 }
 
 .form-buttons {
@@ -157,8 +164,8 @@ footer {
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: var(--bg);
-    color: var(--text);
+    background-color: #111; /* Substituindo --bg por uma cor direta */
+    color: #fff; /* Substituindo --text por uma cor direta */
     text-align: center;
     padding: 1rem;
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
@@ -172,7 +179,7 @@ footer {
 }
 
 .cookie-banner a {
-    color: var(--green);
+    color: #32cd32;
     text-decoration: none;
 }
 
@@ -182,4 +189,32 @@ footer {
     padding: 0.7rem 1.5rem;
     border-radius: 8px;
     cursor: pointer;
-    transition: background-color 
+    transition: background-color 0.3s;
+    background-color: #28a745;
+    color: white;
+    border: none;
+}
+
+.cookie-banner button:hover {
+    background-color: #218838;
+}
+
+/* Responsividade para telas pequenas */
+@media (max-width: 480px) {
+    .agendamento-box {
+        padding: 20px;
+        width: 90%;
+    }
+
+    .agendamento-box h2 {
+        font-size: 1.5rem;
+    }
+
+    .form-buttons button {
+        width: 48%;
+    }
+
+    .form-buttons button[type="reset"] {
+        margin-left: 4%;
+    }
+}
