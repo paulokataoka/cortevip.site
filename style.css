@@ -155,7 +155,7 @@ body {
   max-width: 320px;
   background-color: rgba(255, 255, 255, 0); /* invisível */
   color: transparent;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* sombra escura */
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.8); /* sombra branca */
   border-radius: 8px;
   pointer-events: none;
 }
