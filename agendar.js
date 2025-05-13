@@ -5,23 +5,25 @@ document.addEventListener('DOMContentLoaded', async () => {
     );
 
     const horariosDisponiveis = ['10:00', '11:00', '13:00', '14:00', '16:00', '17:00'];
-
     const horaSelect = document.getElementById('hora');
     const barbeiroSelect = document.getElementById('barbeiro');
-    
-    // Função para verificar as vagas ocupadas para cada horário de um barbeiro
+    const form = document.querySelector('.agendamento-form');
+    const mensagem = document.createElement('div');
+    mensagem.id = 'mensagem';
+    form.appendChild(mensagem);
+
+    // Verifica vagas ocupadas por horário e barbeiro
     async function verificarHorariosOcupados(dataSelecionada) {
         const { data: agendamentos, error } = await supabaseClient
             .from('agendamentos')
             .select('hora, barbeiro')
-            .eq('data', dataSelecionada); // Filtra pela data selecionada
-        
+            .eq('data', dataSelecionada);
+
         if (error) {
             console.error(error);
             return [];
         }
 
-        // Contabiliza os horários ocupados por barbeiro
         const vagasOcupadas = {};
 
         horariosDisponiveis.forEach(hora => {
@@ -32,8 +34,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             });
         });
 
-        agendamentos.forEach(agendamento => {
-            const { hora, barbeiro } = agendamento;
+        agendamentos.forEach(({ hora, barbeiro }) => {
             if (vagasOcupadas[hora] && vagasOcupadas[hora][barbeiro] < 5) {
                 vagasOcupadas[hora][barbeiro]++;
             }
@@ -42,19 +43,16 @@ document.addEventListener('DOMContentLoaded', async () => {
         return vagasOcupadas;
     }
 
-    // Função para atualizar as opções de horários com base nas vagas
+    // Atualiza os horários no select com base nas vagas
     async function atualizarHorariosDisponiveis(dataSelecionada) {
         const vagasOcupadas = await verificarHorariosOcupados(dataSelecionada);
-
-        // Limpa as opções atuais de horário
         horaSelect.innerHTML = '';
 
-        horariosDisponiveis.forEach((hora) => {
+        horariosDisponiveis.forEach(hora => {
             const option = document.createElement('option');
             option.value = hora;
             option.textContent = hora;
 
-            // Verifica se o horário está ocupado para o barbeiro
             const barbeiro = barbeiroSelect.value;
             const vagas = vagasOcupadas[hora]?.[barbeiro] || 0;
 
@@ -67,24 +65,19 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }
 
-    // Atualiza os horários assim que a data é selecionada
-    document.getElementById('data').addEventListener('change', (event) => {
-        atualizarHorariosDisponiveis(event.target.value);
+    // Listeners para alterar horários disponíveis
+    document.getElementById('data').addEventListener('change', (e) => {
+        atualizarHorariosDisponiveis(e.target.value);
     });
 
-    // Atualiza os horários quando o barbeiro é alterado
-    barbeiroSelect.addEventListener('change', async (event) => {
+    barbeiroSelect.addEventListener('change', async () => {
         const dataSelecionada = document.getElementById('data').value;
         if (dataSelecionada) {
             await atualizarHorariosDisponiveis(dataSelecionada);
         }
     });
 
-    const form = document.querySelector('.agendamento-form');
-    const mensagem = document.createElement('div');
-    mensagem.id = 'mensagem';
-    form.appendChild(mensagem);
-
+    // Envio do formulário
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
@@ -96,44 +89,52 @@ document.addEventListener('DOMContentLoaded', async () => {
         const hora = document.getElementById('hora').value;
         const servico = document.getElementById('servico').value;
 
+        if (!nome || !celular || !unidade || !barbeiro || !data || !hora || !servico) {
+            mensagem.textContent = '⚠️ Por favor, preencha todos os campos.';
+            mensagem.style.color = 'orange';
+            return;
+        }
+
+        const submitBtn = form.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+
         const { error } = await supabaseClient
             .from('agendamentos')
             .insert([{ nome, celular, unidade, barbeiro, data, hora, servico }]);
 
+        submitBtn.disabled = false;
+
         if (error) {
             console.error(error);
-            mensagem.textContent = '❌ Ocorreu um erro ao enviar seu agendamento. Tente novamente.';
+            mensagem.textContent = '❌ Erro ao agendar. Tente novamente.';
             mensagem.style.color = 'red';
         } else {
             mensagem.textContent = '✅ Agendamento realizado com sucesso!';
             mensagem.style.color = 'green';
             form.reset();
-            // Atualiza os horários disponíveis após um novo agendamento
             await atualizarHorariosDisponiveis(data);
+            setTimeout(() => mensagem.textContent = '', 5000);
         }
     });
 
-    // Inicializa as opções de horários ao carregar a página
+    // Carrega horários se houver data selecionada
     const dataSelecionada = document.getElementById('data').value;
     if (dataSelecionada) {
         await atualizarHorariosDisponiveis(dataSelecionada);
     }
+
+    // Cookies
+    if (!localStorage.getItem('cookies-accepted')) {
+        document.getElementById('cookie-banner').style.display = 'block';
+    }
+
+    document.getElementById('accept-cookies').addEventListener('click', function () {
+        localStorage.setItem('cookies-accepted', 'true');
+        document.getElementById('cookie-banner').style.display = 'none';
+    });
+
+    document.getElementById('decline-cookies').addEventListener('click', function () {
+        localStorage.setItem('cookies-accepted', 'false');
+        document.getElementById('cookie-banner').style.display = 'none';
+    });
 });
-
-// Cookies
-if (!localStorage.getItem('cookies-accepted')) {
-    document.getElementById('cookie-banner').style.display = 'block';
-}
-
-document.getElementById('accept-cookies').addEventListener('click', function() {
-    localStorage.setItem('cookies-accepted', 'true');
-    document.getElementById('cookie-banner').style.display = 'none';
-});
-
-document.getElementById('decline-cookies').addEventListener('click', function() {
-    localStorage.setItem('cookies-accepted', 'false');
-    document.getElementById('cookie-banner').style.display = 'none';
-});
-
-
-
