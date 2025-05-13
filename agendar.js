@@ -25,15 +25,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const nome = document.getElementById('nome').value.trim();
         const celular = document.getElementById('celular').value.trim();
-        const endereco = document.getElementById("endereco").value;
+        const barbearia = document.getElementById('barbearia').value; // Mudança para 'barbearia'
         const barbeiro = document.getElementById('barbeiro').value;
         const data = document.getElementById('data').value;
         const hora = document.getElementById('hora').value;
         const servico = document.getElementById('servico').value;
 
+        if (!nome || !celular || !barbearia || !barbeiro || !data || !hora || !servico) {
+            mensagem.textContent = '❌ Por favor, preencha todos os campos.';
+            mensagem.style.color = 'red';
+            return; // Impede o envio se algum campo estiver vazio
+        }
+
         const { error } = await supabaseClient
             .from('agendamentos')
-            .insert([{ nome, celular, endereco, barbeiro, data, hora, servico }]);
+            .insert([{ nome, celular, barbearia, barbeiro, data, hora, servico }]);
 
         if (error) {
             console.error(error);
@@ -43,6 +49,9 @@ document.addEventListener('DOMContentLoaded', () => {
             mensagem.textContent = '✅ Agendamento realizado com sucesso!';
             mensagem.style.color = 'green';
             form.reset();
+            setTimeout(() => {
+                mensagem.textContent = ''; // Limpa a mensagem após alguns segundos
+            }, 3000);
         }
     });
 });
