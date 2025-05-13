@@ -1,108 +1,60 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Agendar - CorteVip</title>
-    <link rel="stylesheet" href="agendar.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CorteVip - Agendamento</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script defer src="script.js"></script>
 </head>
 <body>
-    <!-- Barra superior -->
-    <header class="header">
-        <div class="logo">
-            <h1>Cortevip.site</h1>
-        </div>
-    </header>
+  <div class="container">
+    <h1>Agende seu horário</h1>
+    <form class="agendamento-form">
+      <label for="nome">Nome</label>
+      <input type="text" id="nome" required>
 
-    <!-- Área de agendamento -->
-    <main class="agendamento-content">
-        <div class="agendamento-box">
-            <h2>Agendar Horário</h2>
-            <form id="agendamento-form" class="agendamento-form">
-                <div class="form-group">
-                    <label for="nome">Seu Nome:</label>
-                    <input type="text" id="nome" name="nome" required />
-                </div>
+      <label for="celular">Celular</label>
+      <input type="tel" id="celular" required>
 
-                <div class="form-group">
-                    <label for="celular">Celular:</label>
-                    <input type="tel" id="celular" name="celular" placeholder="(XX) XXXXX-XXXX" required />
-                </div>
+      <label for="unidade">Unidade</label>
+      <select id="unidade" required>
+        <option value="">Selecione</option>
+        <option value="Centro">Centro</option>
+        <option value="Zona Sul">Zona Sul</option>
+      </select>
 
-                <div class="form-group">
-                    <label for="barbearia">Barbearia:</label>
-                    <select id="barbearia" name="barbearia" required>
-                        <option value="">Selecione a barbearia...</option>
-                        <option value="kataoka-centro">Kataoka's - Centro - SP</option>
-                    </select>
-                </div>
+      <label for="barbeiro">Barbeiro</label>
+      <select id="barbeiro" required>
+        <option value="">Selecione</option>
+        <option value="Lucas">Lucas</option>
+        <option value="Matheus">Matheus</option>
+        <option value="Rafael">Rafael</option>
+      </select>
 
-                <div class="form-group">
-                    <label for="barbeiro">Barbeiro:</label>
-                    <select id="barbeiro" name="barbeiro" required>
-                        <option value="">Selecione o barbeiro...</option>
-                        <option value="Paulo">Paulo Kataoka</option>
-                    </select>
-                </div>
+      <label for="data">Data</label>
+      <input type="date" id="data" required>
 
-                <div class="form-group">
-                    <label for="hora">Hora:</label>
-                    <select id="hora" name="hora" required>
-                    <option value="">Selecione a hora...</option>
-                    </select>
-                </div>
+      <label for="hora">Hora</label>
+      <select id="hora" required></select>
 
+      <label for="servico">Serviço</label>
+      <select id="servico" required>
+        <option value="">Selecione</option>
+        <option value="Corte">Corte</option>
+        <option value="Barba">Barba</option>
+        <option value="Corte + Barba">Corte + Barba</option>
+      </select>
 
-                <div class="form-group">
-                    <label for="hora">Hora:</label>
-                    <input type="time" id="hora" name="hora" required />
-                </div>
+      <button type="submit">Agendar</button>
+    </form>
+  </div>
 
-                <div class="form-group">
-                    <label for="servico">Serviço:</label>
-                    <select id="servico" name="servico" required>
-                        <option value="">Selecione...</option>
-                        <option value="corte">Corte de Cabelo: R$89,99</option>
-                        <option value="barba">Barba: R$64,90</option>
-                        <option value="combo">Corte + Barba: R$149,90</option>
-                        <option value="outro">Outro</option>
-                    </select>
-                </div>
-
-                <div class="form-buttons">
-                    <button type="submit">Confirmar Agendamento</button>
-                    <button type="reset">Limpar</button>
-                </div>
-
-                <p id="mensagem"></p>
-            </form>
-        </div>
-    </main>
-
-    <!-- Contatar Suporte -->
-    <div class="contatar-suporte">
-        <a href="https://wa.me/seunumero" target="_blank">Contatar Suporte</a>
-        <div class="voltar-inicio">
-            <a href="index.html" class="btn-voltar">← Voltar para Início</a>
-        </div>
-    </div>
-
-    <!-- Banner de Cookies -->
-    <div id="cookie-banner" class="cookie-banner">
-        <p>Este site utiliza cookies para melhorar sua experiência. Ao continuar a navegação, você concorda com o uso de cookies. <a href="política-de-cookies.html">Leia nossa Política de Cookies</a>.</p>
-        <button id="accept-cookies" class="btn primary">Aceitar</button>
-        <button id="decline-cookies" class="btn secondary">Recusar</button>
-    </div>
-
-    <!-- Rodapé -->
-    <footer>
-        <p class="version-info">Versão 1.0 - Cortevip.site - © 2025 Paulo Cesar Kataoka. Todos os direitos reservados.</p>
-    </footer>
-
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="agendar.js"></script>
+  <div id="cookie-banner">
+    Este site usa cookies para melhorar sua experiência.
+    <button id="accept-cookies">Aceitar</button>
+    <button id="decline-cookies">Recusar</button>
+  </div>
 </body>
 </html>
-
-
