@@ -128,63 +128,65 @@ footer {
     color: #aaa;
     font-size: 0.9rem;
 }
+
 .voltar-inicio {
-  text-align: center;
-  margin: 2rem 0 1rem;
+    text-align: center;
+    margin: 2rem 0 1rem;
 }
 
 .btn-voltar {
-  display: inline-block;
-  padding: 0.7rem 1.5rem;
-  background-color: transparent;
-  color: var(--green, #32cd32);
-  border: 2px solid var(--green, #32cd32);
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: all 0.3s ease;
+    display: inline-block;
+    padding: 0.7rem 1.5rem;
+    background-color: transparent;
+    color: var(--green, #32cd32);
+    border: 2px solid var(--green, #32cd32);
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
 }
 
 .btn-voltar:hover {
-  background-color: var(--green, #32cd32);
-  color: #fff;
+    background-color: var(--green, #32cd32);
+    color: #fff;
 }
+
 /* Estilos para o banner de cookies */
 .cookie-banner {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: var(--bg);
-  color: var(--text);
-  text-align: center;
-  padding: 1rem;
-  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-  z-index: 9999;
-  display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--bg);
+    color: var(--text);
+    text-align: center;
+    padding: 1rem;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
+    display: none;
 }
 
 .cookie-banner p {
-  margin: 0;
-  font-size: 1rem;
+    margin: 0;
+    font-size: 1rem;
 }
 
 .cookie-banner a {
-  color: var(--green);
-  text-decoration: none;
+    color: var(--green);
+    text-decoration: none;
 }
 
 .cookie-banner button {
-  margin-top: 1rem;
-  font-size: 1rem;
-  padding: 0.7rem 1.5rem;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+    margin-top: 1rem;
+    font-size: 1rem;
+    padding: 0.7rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .cookie-banner button:hover {
-  background-color: #28a428;
+    background-color: #28a428;
 }
 
 
