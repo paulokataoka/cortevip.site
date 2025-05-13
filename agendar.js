@@ -1,10 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
     const supabaseClient = supabase.createClient(
         'https://smfeazihfcqmtmmnhknm.supabase.co',
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNtZmVhemloZmNxbXRtbW5oa25tIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDYzNzMzOTcsImV4cCI6MjA2MTk0OTM5N30.iiFgvwJ89Jnm6Z5HDJm24LJrwhK_3tc_arHzDMOZvwc'
+        'sua-chave-aqui'
     );
 
-    const horariosDisponiveis = ['09:00', '11:00', '13:00', '15:00', '17:00'];
+    // Adicionando os horários da noite
+    const horariosDisponiveis = ['09:00', '11:00', '13:00', '15:00', '17:00', '19:00', '20:30'];
 
     const horaSelect = document.getElementById('hora');
     horariosDisponiveis.forEach((hora) => {
@@ -24,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const nome = document.getElementById('nome').value.trim();
         const celular = document.getElementById('celular').value.trim();
-        const endereco = document.getElementById("endereco").value;  // Agora é "endereco"
+        const endereco = document.getElementById("endereco").value;
         const barbeiro = document.getElementById('barbeiro').value;
         const data = document.getElementById('data').value;
         const hora = document.getElementById('hora').value;
@@ -32,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const { error } = await supabaseClient
             .from('agendamentos')
-            .insert([{ nome, celular, endereco, barbeiro, data, hora, servico }]);  // Agora é "endereco" ao invés de "unidade"
+            .insert([{ nome, celular, endereco, barbeiro, data, hora, servico }]);
 
         if (error) {
             console.error(error);
@@ -42,5 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
             mensagem.textContent = '✅ Agendamento realizado com sucesso!';
             mensagem.style.color = 'green';
             form.reset();
-       
-
+        }
+    });
+});
