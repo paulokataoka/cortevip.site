@@ -1,74 +1,166 @@
-/* Estilo geral da página */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+/* Definições gerais */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 20px;
+    overflow: auto;
 }
 
 .container {
-    background-color: white;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 600px;
+    text-align: center;
+    overflow: visible;
+    margin-top: 20px; /* Adiciona um pequeno espaço no topo */
 }
 
 h1 {
-    text-align: center;
+    font-size: 2em;
     margin-bottom: 20px;
+    color: #32cd32;;
+}
+
+/* Estilo do formulário */
+.form-agendamento {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
 }
 
 .form-group {
     margin-bottom: 15px;
+    text-align: left;
 }
 
 label {
     font-weight: bold;
-    display: block;
     margin-bottom: 5px;
+    display: block;
 }
 
-input[type="text"], input[type="date"], input[type="time"] {
+input, select {
     width: 100%;
     padding: 10px;
     border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 16px;
+    border-radius: 4px;
+    font-size: 1em;
+    margin-top: 5px;
 }
 
-button[type="submit"] {
-    width: 100%;
-    padding: 12px;
-    background-color: #28a745;
+input:focus, select:focus {
+    border-color: #007b5e;
+    outline: none;
+}
+
+/* Botões */
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+button {
+    padding: 12px 20px;
+    font-size: 1.1em;
     border: none;
-    color: white;
-    font-size: 18px;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 48%; /* Ajusta os botões para ter o mesmo tamanho */
 }
 
-button[type="submit"]:hover {
-    background-color: #218838;
+.btn-agendar {
+    background-color: #32cd32;;
+    color: white;
 }
 
+.btn-agendar:hover {
+    background-color: #32cd32;;
+}
+
+.btn-limpar {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+.btn-limpar:hover {
+    background-color: #ddd;
+}
+
+/* Mensagem de status */
 .mensagem {
-    margin-top: 15px;
-    font-size: 16px;
+    margin-top: 20px;
+    color: #e74c3c;
+    font-size: 1.1em;
+    display: block;
+}
+
+/* Suporte */
+.suporte {
+    margin-top: 20px;
+}
+
+.suporte a {
+    color: #32cd32;;
+    text-decoration: none;
+}
+
+.suporte a:hover {
+    text-decoration: underline;
+}
+
+/* Rodapé */
+.rodape {
     text-align: center;
+    margin-top: 30px;
+    font-size: 0.9em;
+    color: #777;
 }
 
-.mensagem.red {
-    color: red;
+.rodape a {
+    color: #32cd32;;
+    text-decoration: none;
 }
 
-.mensagem.green {
-    color: green;
+.rodape a:hover {
+    text-decoration: underline;
+}
+
+/* Estilo responsivo */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+        width: 100%;
+    }
+
+    h1 {
+        font-size: 1.8em;
+    }
+
+    .form-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    button {
+        width: 100%;
+        margin-top: 10px;
+    }
 }
 
 
