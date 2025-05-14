@@ -24,13 +24,28 @@ html, body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #1f1f1f;  /* Fundo escuro para o container */
+  background: linear-gradient(45deg, #6a11cb, #2575fc);  /* Gradiente inicial */
+  background-size: 400% 400%;  /* Tamanho do gradiente para animação */
+  animation: gradientAnimation 15s ease infinite;  /* Animação do gradiente */
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);  /* Sombra mais suave para o efeito */
   padding: 2rem;
   width: 100%;
   max-width: 600px;
   text-align: center;
+}
+
+/* Animação do gradiente */
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 /* Título principal */
