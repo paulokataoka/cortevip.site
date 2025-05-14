@@ -12,8 +12,8 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #000000;  /* Cor de fundo preta */
-  color: #f4f4f4;  /* Cor de texto clara para contraste */
+  background-color: #ffffff;  /* Cor de fundo branca */
+  color: #333;  /* Cor de texto escura para contraste */
   padding: 0;
   margin: 0;
 }
@@ -24,9 +24,9 @@ html, body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #1f1f1f;  /* Fundo escuro para o container */
+  background-color: #ffffff;  /* Fundo branco para o container */
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);  /* Sombra mais suave para o efeito */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);  /* Sombra mais suave para o efeito */
   padding: 2rem;
   width: 100%;
   max-width: 600px;
@@ -65,7 +65,7 @@ label {
   display: block;
   font-weight: bold;
   margin-bottom: 0.5rem;
-  color: #f4f4f4;  /* Cor de texto clara para labels */
+  color: #333;  /* Cor de texto escura para labels */
 }
 
 input, select, textarea {
@@ -75,8 +75,8 @@ input, select, textarea {
   border: 1px solid #ccc;
   font-size: 1rem;
   transition: border 0.3s ease;
-  background-color: #333;  /* Fundo escuro nos campos */
-  color: #f4f4f4;  /* Cor de texto clara nos campos */
+  background-color: #f9f9f9;  /* Fundo claro nos campos */
+  color: #333;  /* Cor de texto escura nos campos */
 }
 
 input:focus, select:focus, textarea:focus {
@@ -253,11 +253,6 @@ footer.rodape a:hover {
   }
 }
 
-/* Removendo animação de gradiente, criando um fundo fixo */
-body {
-  background: linear-gradient(45deg, #6a11cb, #2575fc);  /* Gradiente fixo */
-}
-
 /* Estilos do Chatbot */
 .chatbot {
   position: fixed;
@@ -339,6 +334,3 @@ body {
   cursor: pointer;
 }
 
-.chat-input button:hover {
-  background-color: #28a428;
-}
