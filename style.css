@@ -267,4 +267,132 @@ footer.rodape a:hover {
     opacity: 1;
   }
 }
+/* Resetando margens e padding */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* A altura mínima da tela e centralização global */
+html, body {
+  height: 100%;
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000000;  /* Cor de fundo preta */
+  color: #f4f4f4;  /* Cor de texto clara para contraste */
+  padding: 0;
+  margin: 0;
+}
+
+/* Estilos do container principal */
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(45deg, #6a11cb, #2575fc);  /* Gradiente inicial */
+  background-size: 400% 400%;  /* Tamanho do gradiente para animação */
+  animation: gradientAnimation 15s ease infinite;  /* Animação do gradiente */
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);  /* Sombra mais suave para o efeito */
+  padding: 2rem;
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+}
+
+/* Animação do gradiente */
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Título principal */
+h1 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #32cd32;  /* Cor verde para o título */
+}
+
+/* Estilo do subtítulo */
+.subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  color: #bbb;  /* Cor de texto suave */
+}
+
+/* Estilo do botão de navegação */
+.button-group {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+/* Estilo dos botões */
+.btn {
+  font-size: 1rem;
+  padding: 0.8rem 2rem;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.primary {
+  background-color: #32cd32;
+  color: white;
+}
+
+.secondary {
+  background-color: transparent;
+  border: 2px solid #32cd32;
+  color: #32cd32;
+}
+
+.primary:hover {
+  background-color: #28a428;
+  transform: translateY(-2px);
+}
+
+.secondary:hover {
+  background-color: #32cd32;
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* Animação para o efeito de texto digitado (se necessário) */
+#typed-text {
+  font-weight: bold;
+  color: #32cd32;
+}
+
+.cursor {
+  display: inline-block;
+  width: 8px;
+  height: 20px;
+  margin-left: 5px;
+  background-color: #32cd32;
+  animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
 
