@@ -1,81 +1,106 @@
-// Substitua pelos seus dados do Supabase
-const SUPABASE_URL = 'https://sfkhdqefmazimmscmjeg.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'; // coloque sua chave real aqui
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("agendamento-form");
+    const mensagem = document.getElementById("mensagem");
+    const botaoAgendar = form.querySelector(".btn-agendar");
 
-// Inicializa o cliente Supabase
-const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
 
-// Referência ao formulário e elemento de mensagem
-const form = document.getElementById("agendamento-form");
-const mensagemElement = document.getElementById("mensagem");
+        // Desativa botão temporariamente
+        botaoAgendar.disabled = true;
+        botaoAgendar.textContent = "Aguarde...";
 
-// Verifica se o horário já está ocupado na tabela do Supabase
-async function verificarHorarioOcupado(data, hora) {
-    const { data: agendamentos, error } = await supabase
-        .from('agendamentos')
-        .select('*')
-        .eq('data', data)
-        .eq('hora', hora);
+        // Coleta os dados do formulário
+        const dados = {
+            nome: form.nome.value.trim(),
+            celular: form.celular.value.trim(),
+            barbearia: form.barbearia.value,
+            barbeiro: form.barbeiro.value,
+            data: form.data.value,
+            hora: form.hora.value,
+            servico: form.servico.value,
+        };
 
-    if (error) {
-        console.error("Erro ao verificar horário:", error.message);
-        return false;
-    }
+        // Validação simples extra
+        if (!dados.nome || !dados.celular || !dados.barbearia || !dados.barbeiro || !dados.data || !dados.hora || !dados.servico) {
+            exibirMensagem("Preencha todos os campos obrigatórios.", false);
+            botaoAgendar.disabled = false;
+            botaoAgendar.textContent = "Agendar";
+            return;
+        }
 
-    return agendamentos.length > 0;
-}
+        // Simula envio ao servidor (aqui você pode integrar com Supabase, Google Sheets, etc.)
+        setTimeout(() => {
+            // Sucesso simulado
+            exibirMensagem("Agendamento realizado com sucesso!", true);
+            form.reset();
+            botaoAgendar.disabled = false;
+            botaoAgendar.textContent = "Agendar";
+        }, 1500);
+    });
 
-// Lida com o envio do formulário
-form.addEventListener("submit", async function (e) {
-    e.preventDefault();
+    function exibirMensagem(texto, sucesso = true) {
+        mensagem.textContent = texto;
+        mensagem.className = "mensagem visivel " + (sucesso ? "sucesso" : "erro");
 
-    // Coleta os valores do formulário
-    const nome = document.getElementById("nome").value.trim();
-    const celular = document.getElementById("celular").value.trim();
-    const barbearia = document.getElementById("barbearia").value.trim();
-    const barbeiro = document.getElementById("barbeiro").value.trim();
-    const data = document.getElementById("data").value;
-    const hora = document.getElementById("hora").value;
-    const servico = document.getElementById("servico").value.trim();
-
-    // Validação simples
-    if (!nome || !celular || !barbearia || !barbeiro || !data || !hora || !servico) {
-        mensagemElement.textContent = "Por favor, preencha todos os campos.";
-        mensagemElement.style.color = "red";
-        return;
-    }
-
-    // Verifica se o horário já está ocupado
-    const ocupado = await verificarHorarioOcupado(data, hora);
-    if (ocupado) {
-        mensagemElement.textContent = "Este horário já está agendado. Escolha outro.";
-        mensagemElement.style.color = "red";
-        return;
-    }
-
-    // Insere o agendamento no Supabase
-    const { error } = await supabase
-        .from('agendamentos')
-        .insert([
-            {
-                nome,
-                celular,
-                barbearia,
-                barbeiro,
-                data,
-                hora,
-                servico,
-            },
-        ]);
-
-    if (error) {
-        console.error("Erro ao agendar:", error.message);
-        mensagemElement.textContent = "Erro ao realizar o agendamento.";
-        mensagemElement.style.color = "red";
-    } else {
-        mensagemElement.textContent = "Agendamento realizado com sucesso!";
-        mensagemElement.style.color = "green";
-        form.reset();
+        // Esconde a mensagem após 4 segundos
+        setTimeout(() => {
+            mensagem.classList.remove("visivel");
+        }, 4000);
     }
 });
+// Efeito de fundo animado (linhas que se movem)
+const canvas = document.getElementById("fundo-linhas");
+const ctx = canvas.getContext("2d");
 
+let width, height;
+let lines = [];
+
+function resizeCanvas() {
+  width = window.innerWidth;
+  height = window.innerHeight;
+  canvas.width = width;
+  canvas.height = height;
+}
+
+window.addEventListener("resize", resizeCanvas);
+resizeCanvas();
+
+// Gera linhas animadas
+function gerarLinhas(qtd) {
+  lines = [];
+  for (let i = 0; i < qtd; i++) {
+    lines.push({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      length: Math.random() * 100 + 50,
+      speed: Math.random() * 0.5 + 0.2,
+      opacity: Math.random() * 0.5 + 0.2
+    });
+  }
+}
+
+gerarLinhas(80);
+
+function animarFundo() {
+  ctx.clearRect(0, 0, width, height);
+  ctx.strokeStyle = "#32cd32";
+
+  for (let linha of lines) {
+    ctx.globalAlpha = linha.opacity;
+    ctx.beginPath();
+    ctx.moveTo(linha.x, linha.y);
+    ctx.lineTo(linha.x + linha.length, linha.y);
+    ctx.stroke();
+
+    linha.x += linha.speed;
+    if (linha.x > width) {
+      linha.x = -linha.length;
+      linha.y = Math.random() * height;
+    }
+  }
+
+  requestAnimationFrame(animarFundo);
+}
+
+animarFundo();
