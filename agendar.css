@@ -1,88 +1,180 @@
-:root {
-  --color-bg: #ffffff;
-  --color-text: #000000;
-  --color-accent: #00d084;
-  --color-error: #ff4d4d;
-  --color-muted: #666;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-bg: #121212;
-    --color-text: #f0f0f0;
-    --color-accent: #00ff99;
-    --color-error: #ff6666;
-    --color-muted: #aaa;
-  }
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
 }
 
 body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background-color: var(--color-bg);
-  color: var(--color-text);
+  background-color: #f4f4f4;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-.container {
-  max-width: 600px;
-  margin: 2rem auto;
-  padding: 2rem;
+/* Cabeçalho */
+.header {
+  background-color: #111;
+  color: #fff;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Área principal */
+.agendamento-content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.agendamento-box {
+  background: #fff;
+  padding: 30px;
   border-radius: 10px;
-  background: var(--color-bg);
-  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 450px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-h1, label {
-  color: var(--color-text);
+.agendamento-box h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
 }
 
-input, select, button, textarea {
+.agendamento-form .form-group {
+  margin-bottom: 15px;
+}
+
+.agendamento-form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.agendamento-form input,
+.agendamento-form select {
   width: 100%;
   padding: 10px;
-  margin-top: 6px;
-  margin-bottom: 16px;
-  border: 1px solid var(--color-muted);
-  border-radius: 6px;
-  background: transparent;
-  color: var(--color-text);
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
 }
 
-button {
-  background-color: var(--color-accent);
-  color: white;
-  font-weight: bold;
+.agendamento-form input:focus,
+.agendamento-form select:focus {
+  border-color: #28a745;
+  outline: none;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.form-buttons button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: 0.3s;
+  font-weight: bold;
 }
 
-button:hover {
-  background-color: #00b473;
+.form-buttons button[type="submit"] {
+  background-color: #28a745;
+  color: white;
+}
+
+.form-buttons button[type="submit"]:hover {
+  background-color: #218838;
+}
+
+.form-buttons button[type="reset"] {
+  background-color: #dc3545;
+  color: white;
+}
+
+.form-buttons button[type="reset"]:hover {
+  background-color: #c82333;
 }
 
 #mensagem {
-  margin-top: 10px;
+  margin-top: 15px;
+  text-align: center;
   font-weight: bold;
 }
 
-#cookie-banner {
-  display: none;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background: var(--color-muted);
-  color: white;
-  padding: 10px;
+.voltar-inicio {
   text-align: center;
+  margin: 2rem 0 1rem;
 }
 
-#cookie-banner button {
-  margin-left: 10px;
-  background: var(--color-accent);
+.btn-voltar {
+  display: inline-block;
+  padding: 0.7rem 1.5rem;
+  background-color: transparent;
+  color: var(--green, #32cd32);
+  border: 2px solid var(--green, #32cd32);
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-voltar:hover {
+  background-color: var(--green, #32cd32);
+  color: #fff;
+}
+
+/* Banner de cookies */
+.cookie-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #111;
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
+  z-index: 9999;
+  display: none;
+}
+
+.cookie-banner button {
+  margin-top: 1rem;
+  padding: 0.7rem 1.5rem;
+  font-size: 1rem;
   border: none;
-  padding: 6px 12px;
+  border-radius: 8px;
+  background-color: #28a745;
   color: white;
-  border-radius: 4px;
   cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.cookie-banner button:hover {
+  background-color: #218838;
+}
+
+/* Responsivo */
+@media (max-width: 480px) {
+  .agendamento-box {
+    padding: 20px;
+    width: 90%;
+  }
+
+  .form-buttons button {
+    width: 48%;
+  }
+
+  .form-buttons button[type="reset"] {
+    margin-left: 4%;
+  }
 }
 
