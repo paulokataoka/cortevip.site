@@ -46,50 +46,46 @@ body {
 
 .container {
   width: 100%;
-  max-width: 480px;
+  max-width: 500px;
   background-color: var(--input-bg);
   padding: 2rem;
   border-radius: 12px;
   box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-  transition: all 0.3s ease;
 }
 
-h1.logo {
+.logo {
   text-align: center;
   font-size: 2rem;
-  margin-bottom: 0.5rem;
   color: var(--green);
 }
 
-h1.logo span {
+.logo span {
   color: var(--text);
 }
 
 .subtitle {
   text-align: center;
-  font-size: 1rem;
   margin-bottom: 1.5rem;
+  font-size: 1rem;
   color: var(--text);
 }
 
-form {
+.agendamento-form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-input, select, textarea {
+input, select {
   padding: 0.8rem;
   border: 1px solid var(--input-border);
   border-radius: 8px;
   font-size: 1rem;
   background-color: var(--bg);
   color: var(--text);
-  resize: none;
 }
 
-input::placeholder,
-textarea::placeholder {
+input::placeholder {
   color: #888;
 }
 
@@ -115,18 +111,21 @@ button:hover {
   font-weight: bold;
 }
 
-.voltar {
+.voltar,
+.suporte {
   display: block;
   text-align: center;
-  margin-top: 2rem;
+  margin-top: 1rem;
   color: var(--green);
   text-decoration: none;
   font-weight: 500;
   transition: color 0.3s;
 }
 
-.voltar:hover {
+.voltar:hover,
+.suporte:hover {
   color: var(--btn-hover);
 }
+
 
 
