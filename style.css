@@ -1,218 +1,150 @@
+/* Resetando margens e padding */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* A altura mínima da tela e centralização global */
 html, body {
   height: 100%;
-  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  transition: background-color 0.3s, color 0.3s;
+  font-family: 'Arial', sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--bg);
-  color: var(--text);
-  padding: 1rem;
+  background-color: #f4f4f4;  /* Cor de fundo suave */
+  color: #333;  /* Cor de texto */
+  padding: 0;
+  margin: 0;
 }
 
-/* Tema dinâmico com suporte a modo escuro/claro */
-:root {
-  --green: #32cd32;
-  --white: #ffffff;
-  --black: #111111;
-
-  /* Modo claro */
-  --bg: var(--white);
-  --text: var(--black);
-  --btn-bg: var(--green);
-  --btn-text: var(--white);
-  --btn-secondary-bg: transparent;
-  --btn-secondary-border: var(--green);
-  --btn-secondary-text: var(--green);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0d0d0d;
-    --text: #f5f5f5;
-    --btn-bg: var(--green);
-    --btn-text: var(--white);
-    --btn-secondary-bg: transparent;
-    --btn-secondary-border: var(--green);
-    --btn-secondary-text: var(--green);
-  }
-}
-
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  background-color: var(--bg);
-  color: var(--text);
-}
-
-/* Container principal */
+/* Estilos do container principal */
 .container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-align: center;
-  padding: 2rem 1rem;
-  max-width: 480px;
+  background-color: #ffffff;  /* Cor de fundo branca para o formulário */
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);  /* Sombra suave */
+  padding: 2rem;
   width: 100%;
-  background-color: transparent;
-  border-radius: 10px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  max-width: 600px;  /* Limite máximo de largura */
+  text-align: center;  /* Centraliza os textos internos */
 }
 
-/* Logo estilizada */
-.logo {
-  font-size: 3rem;
+/* Título principal */
+h1 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+/* Estilos do formulário */
+.form-agendamento {
+  width: 100%;
+}
+
+/* Estilo dos campos de entrada */
+.form-group {
+  margin-bottom: 1rem;
+  width: 100%;
+  text-align: left;
+}
+
+label {
+  display: block;
   font-weight: bold;
   margin-bottom: 0.5rem;
 }
 
-.logo span {
-  color: var(--green);
-}
-
-/* Subtítulo */
-.subtitle {
-  font-size: 1.2rem;
-  margin-bottom: 2rem;
-  opacity: 0.85;
-}
-
-.form-group {
-  width: 100%;
-  margin-bottom: 1rem;
-}
-
-label {
-  font-weight: 600;
-  display: block;
-  margin-bottom: 0.5rem;
-}
-
-input, select, textarea {
+input, select {
   width: 100%;
   padding: 0.8rem;
-  font-size: 1rem;
-  border-radius: 8px;
+  border-radius: 5px;
   border: 1px solid #ccc;
-  background-color: var(--white);
-  color: var(--black);
-  transition: border-color 0.3s;
+  font-size: 1rem;
+  transition: border 0.3s ease;
 }
 
-input:focus, select:focus, textarea:focus {
-  border-color: var(--green);
+input:focus, select:focus {
+  border-color: #32cd32;  /* Cor de borda quando em foco */
   outline: none;
 }
 
-textarea {
-  resize: vertical;
-}
-
+/* Estilo dos botões */
 button {
   font-size: 1rem;
-  font-weight: 600;
   padding: 0.8rem 2rem;
-  border-radius: 8px;
+  border-radius: 5px;
   border: none;
-  background-color: var(--btn-bg);
-  color: var(--btn-text);
+  background-color: #32cd32;
+  color: #fff;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background-color 0.3s, transform 0.3s;
+  margin-top: 1rem;
 }
 
-button:hover,
-button:focus {
+button:hover {
   background-color: #28a428;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(50, 205, 50, 0.3);
 }
 
 button[type="reset"] {
   background-color: transparent;
-  border: 2px solid var(--btn-bg);
-  color: var(--btn-bg);
+  border: 2px solid #32cd32;
+  color: #32cd32;
+  margin-left: 1rem;
 }
 
 button[type="reset"]:hover {
-  background-color: var(--btn-bg);
-  color: var(--white);
+  background-color: #32cd32;
+  color: #fff;
 }
 
-footer.rodape {
-  margin-top: 2rem;
-  font-size: 0.9rem;
-}
-
-footer.rodape a {
-  color: var(--green);
-  text-decoration: none;
-  font-weight: 600;
-}
-
-footer.rodape a:hover {
-  text-decoration: underline;
-}
-
+/* Estilos de suporte e rodapé */
 .suporte a {
-  color: var(--green);
   text-decoration: none;
-  font-weight: 600;
+  color: #32cd32;
+  font-weight: bold;
+  margin-top: 1rem;
 }
 
 .suporte a:hover {
   text-decoration: underline;
 }
 
-/* Responsividade para telas menores */
-@media (max-width: 600px) {
+footer.rodape {
+  font-size: 0.8rem;
+  margin-top: 2rem;
+}
+
+footer.rodape a {
+  text-decoration: none;
+  color: #32cd32;
+  font-weight: bold;
+}
+
+footer.rodape a:hover {
+  text-decoration: underline;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
   .container {
-    padding: 1rem;
+    padding: 1.5rem;
   }
 
-  .logo {
-    font-size: 2rem;
+  h1 {
+    font-size: 1.8rem;
   }
 
-  .subtitle {
-    font-size: 1rem;
-  }
-
-  .form-group label {
+  .form-group input, .form-group select {
     font-size: 0.9rem;
   }
 
-  .btn {
-    min-width: 140px;
-  }
-}
-
-/* Responsividade para telas maiores */
-@media (min-width: 600px) {
-  .container {
-    max-width: 600px;
-  }
-  .logo {
-    font-size: 3rem;
-  }
-
-  .subtitle {
-    font-size: 1.2rem;
-  }
-
-  .form-group label {
-    font-size: 1rem;
-  }
-
-  .btn {
-    min-width: 160px;
+  button {
+    font-size: 0.9rem;
+    padding: 0.8rem 1.5rem;
   }
 }
