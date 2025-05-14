@@ -1,10 +1,31 @@
 let chatWindowVisible = false;
+let isWelcomeMessageSent = false; // Variável para verificar se a saudação já foi enviada
 
 // Função para alternar a visibilidade da janela do chat
 function toggleChatWindow() {
   const chatWindow = document.getElementById('chatWindow');
   chatWindow.style.display = chatWindowVisible ? 'none' : 'flex';
   chatWindowVisible = !chatWindowVisible;
+
+  // Enviar a mensagem de boas-vindas se for a primeira vez que o chat é aberto
+  if (!isWelcomeMessageSent) {
+    sendWelcomeMessage();
+  }
+}
+
+// Função para enviar a mensagem de boas-vindas
+function sendWelcomeMessage() {
+  const chatContent = document.querySelector('.chat-content');
+  const botWelcome = document.createElement('div');
+  botWelcome.classList.add('message', 'bot-message');
+  botWelcome.textContent = "Olá! Bem-vindo ao CorteVip! Como posso ajudá-lo hoje?";
+  chatContent.appendChild(botWelcome);
+  
+  // Scroll até a última mensagem
+  chatContent.scrollTop = chatContent.scrollHeight;
+  
+  // Marcar que a saudação foi enviada
+  isWelcomeMessageSent = true;
 }
 
 // Função para enviar mensagem
@@ -40,13 +61,8 @@ function getBotResponse(userMessage) {
 
   const lowerMessage = userMessage.toLowerCase();
 
-  // Saudações iniciais
-  if (userMessage === "" || lowerMessage.includes("olá") || lowerMessage.includes("oi")) {
-    response = "Olá! Bem-vindo ao CorteVip! Como posso ajudá-lo hoje?";
-  }
-  
   // Respostas específicas
-  else if (lowerMessage.includes("cadastrar barbearia")) {
+  if (lowerMessage.includes("cadastrar barbearia")) {
     response = "Para cadastrar sua barbearia, por favor, forneça o nome, endereço e os serviços que oferece.";
   } 
   
@@ -69,15 +85,10 @@ function getBotResponse(userMessage) {
   return response;
 }
 
-// Quando a janela de chat carregar, enviar boas-vindas
+// Quando a janela de chat carregar, enviar boas-vindas (só se ainda não foi enviada)
 document.addEventListener("DOMContentLoaded", function() {
-  // Adicionar boas-vindas automaticamente quando o chat for aberto
-  const chatContent = document.querySelector('.chat-content');
-  const botWelcome = document.createElement('div');
-  botWelcome.classList.add('message', 'bot-message');
-  botWelcome.textContent = "Olá! Bem-vindo ao CorteVip! Como posso ajudá-lo hoje?";
-  chatContent.appendChild(botWelcome);
-
-  // Scroll até a última mensagem
-  chatContent.scrollTop = chatContent.scrollHeight;
+  // Não enviar a saudação se já foi enviada anteriormente
+  if (!isWelcomeMessageSent) {
+    sendWelcomeMessage();
+  }
 });
