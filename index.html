@@ -25,8 +25,24 @@
     </div>
   </main>
 
+  <!-- Chatbot -->
+  <div id="chatbot" class="chatbot">
+    <div class="chat-header" onclick="toggleChatWindow()">
+      <span>💬</span> <span>Chat com a gente!</span>
+    </div>
+    <div class="chat-window" id="chatWindow">
+      <div class="chat-content">
+        <div class="message bot-message">Olá, como posso te ajudar?</div>
+      </div>
+      <div class="chat-input">
+        <input type="text" id="userMessage" placeholder="Digite sua mensagem..." />
+        <button onclick="sendMessage()">Enviar</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Script principal -->
   <script src="index.js"></script>
+  <script src="chatbot.js"></script>
 </body>
 </html>
-
