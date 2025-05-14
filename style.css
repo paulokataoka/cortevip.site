@@ -78,32 +78,28 @@ button {
   padding: 0.8rem 2rem;
   border-radius: 5px;
   border: none;
-  background-color: #32cd32;  /* Cor de fundo verde */
+  background-color: #32cd32;
   color: #fff;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s ease, box-shadow 0.3s ease;
+  transition: background-color 0.3s, transform 0.3s;
   margin-top: 1rem;
-  display: inline-block;
 }
 
 button:hover {
-  background-color: #28a428; /* Cor de hover mais escura */
-  transform: translateY(-2px);  /* Efeito de levitar */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  /* Sombras ao passar o mouse */
+  background-color: #28a428;
+  transform: translateY(-2px);
 }
 
 button[type="reset"] {
   background-color: transparent;
-  border: 2px solid #32cd32;  /* Borda verde para o botão limpar */
-  color: #32cd32;  /* Cor do texto verde */
+  border: 2px solid #32cd32;
+  color: #32cd32;
   margin-left: 1rem;
 }
 
 button[type="reset"]:hover {
   background-color: #32cd32;
-  color: white;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  color: #fff;
 }
 
 /* Estilos de suporte e rodapé */
@@ -152,4 +148,3 @@ footer.rodape a:hover {
     padding: 0.8rem 1.5rem;
   }
 }
-
