@@ -1,103 +1,56 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Agendar - CorteVip</title>
+    <title>Agendamento CorteVip</title>
     <link rel="stylesheet" href="agendar.css" />
 </head>
 <body>
-    <!-- Barra superior -->
-    <header class="header">
-        <div class="logo">
-            <h1>Cortevip.site</h1>
-        </div>
-    </header>
+    <div class="container">
+        <h1>Agendamento de Corte</h1>
+        <form id="agendamento-form" class="form-agendamento">
+            <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" placeholder="Digite seu nome" required />
+            </div>
 
-    <!-- Área de agendamento -->
-    <main class="agendamento-content">
-        <div class="agendamento-box">
-            <h2>Agendar Horário</h2>
-            <form id="agendamento-form" class="agendamento-form">
-                <div class="form-group">
-                    <label for="nome">Seu Nome:</label>
-                    <input type="text" id="nome" name="nome" required />
-                </div>
+            <div class="form-group">
+                <label for="celular">Celular:</label>
+                <input type="text" id="celular" name="celular" placeholder="Digite seu celular" required />
+            </div>
 
-                <div class="form-group">
-                    <label for="celular">Celular:</label>
-                    <input type="tel" id="celular" name="celular" placeholder="(XX) XXXXX-XXXX" required />
-                </div>
+            <div class="form-group">
+                <label for="barbearia">Barbearia:</label>
+                <input type="text" id="barbearia" name="barbearia" placeholder="Nome da barbearia" required />
+            </div>
 
-                <div class="form-group">
-                    <label for="barbearia">Barbearia:</label>
-                    <select id="barbearia" name="barbearia" required>
-                        <option value="">Selecione a barbearia...</option>
-                        <option value="kataoka-centro">Kataoka's - Centro - SP</option>
-                    </select>
-                </div>
+            <div class="form-group">
+                <label for="barbeiro">Barbeiro:</label>
+                <input type="text" id="barbeiro" name="barbeiro" placeholder="Nome do barbeiro" required />
+            </div>
 
-                <div class="form-group">
-                    <label for="barbeiro">Barbeiro:</label>
-                    <select id="barbeiro" name="barbeiro" required>
-                        <option value="">Selecione o barbeiro...</option>
-                        <option value="Paulo">Paulo Kataoka</option>
-                    </select>
-                </div>
+            <div class="form-group">
+                <label for="data">Data:</label>
+                <input type="date" id="data" name="data" required />
+            </div>
 
-                <div class="form-group">
-                    <label for="data">Data:</label>
-                    <input type="date" id="data" name="data" required />
-                </div>
+            <div class="form-group">
+                <label for="hora">Hora:</label>
+                <input type="time" id="hora" name="hora" min="09:00" max="18:00" step="3600" required />
+            </div>
 
-                <div class="form-group">
-                    <label for="hora">Hora:</label>
-                    <input type="time" id="hora" name="hora" required />
-                </div>
+            <div class="form-group">
+                <label for="servico">Serviço:</label>
+                <input type="text" id="servico" name="servico" placeholder="Descrição do serviço" required />
+            </div>
 
-                <div class="form-group">
-                    <label for="servico">Serviço:</label>
-                    <select id="servico" name="servico" required>
-                        <option value="">Selecione...</option>
-                        <option value="corte">Corte de Cabelo: R$89,99</option>
-                        <option value="barba">Barba: R$64,90</option>
-                        <option value="combo">Corte + Barba: R$149,90</option>
-                        <option value="outro">Outro</option>
-                    </select>
-                </div>
+            <button type="submit" class="btn-agendar">Agendar</button>
 
-                <div class="form-buttons">
-                    <button type="submit">Confirmar Agendamento</button>
-                    <button type="reset">Limpar</button>
-                </div>
-
-                <p id="mensagem"></p>
-            </form>
-        </div>
-    </main>
-
-    <!-- Contatar Suporte -->
-    <div class="contatar-suporte">
-        <a href="https://wa.me/seunumero" target="_blank">Contatar Suporte</a>
-        <div class="voltar-inicio">
-            <a href="index.html" class="btn-voltar">← Voltar para Início</a>
-        </div>
+            <p id="mensagem" class="mensagem"></p>
+        </form>
     </div>
 
-    <!-- Banner de Cookies -->
-    <div id="cookie-banner" class="cookie-banner">
-        <p>Este site utiliza cookies para melhorar sua experiência. Ao continuar a navegação, você concorda com o uso de cookies. <a href="política-de-cookies.html">Leia nossa Política de Cookies</a>.</p>
-        <button id="accept-cookies" class="btn primary">Aceitar</button>
-        <button id="decline-cookies" class="btn secondary">Recusar</button>
-    </div>
-
-    <!-- Rodapé -->
-    <footer>
-        <p class="version-info">Versão 1.0 - Cortevip.site - © 2025 Paulo Cesar Kataoka. Todos os direitos reservados.</p>
-    </footer>
-
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="agendar.js"></script>
 </body>
 </html>
