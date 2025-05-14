@@ -1,93 +1,95 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Agendamento CorteVip</title>
-    <link rel="stylesheet" href="agendar.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Agendamento CorteVip</title>
+  <link rel="stylesheet" href="agendar.css" />
 </head>
 <body>
-    <div class="container">
-        <h1>Agendar horário</h1>
-        <form id="agendamento-form" class="form-agendamento">
-            <div class="form-group">
-                <label for="nome">Nome:</label>
-                <input type="text" id="nome" name="nome" placeholder="Digite seu nome" required />
-            </div>
+  <canvas id="fundo-linhas"></canvas>
 
-            <div class="form-group">
-                <label for="celular">Celular:</label>
-                <input type="tel" id="celular" name="celular" placeholder="Digite seu celular" required />
-            </div>
+  <div class="container">
+    <h1>Agendar horário</h1>
+    <form id="agendamento-form" class="form-agendamento">
+      <div class="form-group">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" placeholder="Digite seu nome" required />
+      </div>
 
-            <div class="form-group">
-                <label for="barbearia">Barbearia:</label>
-                <select id="barbearia" name="barbearia" required>
-                    <option value="">Selecione uma barbearia</option>
-                    <option value="barbearia1">Barbearia 1 - Vila São José, estado de São Paulo</option>
-                    <option value="barbearia2">Oportunidade</option>
-                </select>
-            </div>
+      <div class="form-group">
+        <label for="celular">Celular:</label>
+        <input type="tel" id="celular" name="celular" placeholder="Digite seu celular" required />
+      </div>
 
-            <div class="form-group">
-                <label for="barbeiro">Barbeiro:</label>
-                <select id="barbeiro" name="barbeiro" required>
-                    <option value="">Selecione um barbeiro</option>
-                    <option value="barbeiro1">Paulo Kataoka</option>
-                </select>
-            </div>
+      <div class="form-group">
+        <label for="barbearia">Barbearia:</label>
+        <select id="barbearia" name="barbearia" required>
+          <option value="">Selecione uma barbearia</option>
+          <option value="barbearia1">Barbearia 1 - Vila São José, estado de São Paulo</option>
+          <option value="barbearia2">Oportunidade</option>
+        </select>
+      </div>
 
-            <div class="form-group">
-                <label for="data">Data:</label>
-                <input type="date" id="data" name="data" required />
-            </div>
+      <div class="form-group">
+        <label for="barbeiro">Barbeiro:</label>
+        <select id="barbeiro" name="barbeiro" required>
+          <option value="">Selecione um barbeiro</option>
+          <option value="barbeiro1">Paulo Kataoka</option>
+        </select>
+      </div>
 
-            <div class="form-group">
-                <label for="hora">Hora:</label>
-                <select id="hora" name="hora" required>
-                    <option value="">Selecione uma hora</option>
-                    <option value="09:00">09:00</option>
-                    <option value="10:00">10:00</option>
-                    <option value="11:00">11:00</option>
-                    <option value="14:00">14:00</option>
-                    <option value="15:00">15:00</option>
-                </select>
-            </div>
+      <div class="form-group">
+        <label for="data">Data:</label>
+        <input type="date" id="data" name="data" required />
+      </div>
 
-            <div class="form-group">
-                <label for="servico">Serviço:</label>
-                <select id="servico" name="servico" required>
-                    <option value="">Selecione o serviço</option>
-                    <option value="corte">Corte</option>
-                    <option value="barba">Barba</option>
-                    <option value="corte-e-barba">Corte e Barba</option>
-                </select>
-            </div>
+      <div class="form-group">
+        <label for="hora">Hora:</label>
+        <select id="hora" name="hora" required>
+          <option value="">Selecione uma hora</option>
+          <option value="09:00">09:00</option>
+          <option value="10:00">10:00</option>
+          <option value="11:00">11:00</option>
+          <option value="14:00">14:00</option>
+          <option value="15:00">15:00</option>
+        </select>
+      </div>
 
-            <div class="form-actions">
-                <button type="submit" class="btn-agendar">Agendar</button>
-                <button type="reset" class="btn-limpar">Limpar</button>
-            </div>
+      <div class="form-group">
+        <label for="servico">Serviço:</label>
+        <select id="servico" name="servico" required>
+          <option value="">Selecione o serviço</option>
+          <option value="corte">Corte</option>
+          <option value="barba">Barba</option>
+          <option value="corte-e-barba">Corte e Barba</option>
+        </select>
+      </div>
 
-            <p id="mensagem" class="mensagem"></p>
-        </form>
+      <div class="form-actions">
+        <button type="submit" class="btn-agendar">Agendar</button>
+        <button type="reset" class="btn-limpar">Limpar</button>
+      </div>
 
-        <div class="suporte">
-            <p>
-                <a href="mailto:support@cortevip.com">Contato por e-mail</a> |
-                <a href="https://wa.me/5511965237500" target="_blank" rel="noopener">WhatsApp</a>
-            </p>
-        </div>
+      <p id="mensagem" class="mensagem"></p>
+    </form>
 
-        <footer class="rodape">
-            <p>
-                &copy; 2025 Paulo Kataoka. Todos os direitos reservados. 
-                <a href="index.html" class="voltar">Voltar para a página inicial</a> |
-                <a href="política-de-cookies.html" target="_blank">Política de Privacidade</a>
-            </p>
-        </footer>
+    <div class="suporte">
+      <p>
+        <a href="mailto:support@cortevip.com">Contato por e-mail</a> |
+        <a href="https://wa.me/5511965237500" target="_blank" rel="noopener">WhatsApp</a>
+      </p>
     </div>
 
-    <script src="agendar.js"></script>
+    <footer class="rodape">
+      <p>
+        &copy; 2025 Paulo Kataoka. Todos os direitos reservados. 
+        <a href="index.html" class="voltar">Voltar para a página inicial</a> |
+        <a href="politica-de-cookies.html" target="_blank">Política de Privacidade</a>
+      </p>
+    </footer>
+  </div>
+
+  <script src="agendar.js"></script>
 </body>
 </html>
