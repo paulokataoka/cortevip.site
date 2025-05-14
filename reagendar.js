@@ -4,13 +4,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Animação suave ao carregar
   const container = document.querySelector(".container");
-  container.style.opacity = "0";
-  container.style.transform = "translateY(20px)";
-  setTimeout(() => {
-    container.style.transition = "opacity 0.6s ease, transform 0.6s ease";
-    container.style.opacity = "1";
-    container.style.transform = "translateY(0)";
-  }, 100);
+  if (container) {
+    container.style.opacity = "0";
+    container.style.transform = "translateY(20px)";
+    setTimeout(() => {
+      container.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+      container.style.opacity = "1";
+      container.style.transform = "translateY(0)";
+    }, 100);
+  }
 
   // Modo escuro/claro automático
   if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
@@ -33,6 +35,14 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
+    // Validação de celular (exemplo simples)
+    const celularRegex = /^\d{10,11}$/;
+    if (!celularRegex.test(celular)) {
+      mensagemSucesso.textContent = "Por favor, insira um celular válido.";
+      mensagemSucesso.style.color = "red";
+      return;
+    }
+
     // Simulação de envio (pode ser adaptado para Supabase ou outro backend)
     setTimeout(() => {
       mensagemSucesso.textContent = "Solicitação enviada com sucesso! Retornaremos em breve.";
@@ -41,5 +51,4 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 500);
   });
 });
-
 
