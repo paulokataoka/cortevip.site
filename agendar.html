@@ -1,60 +1,103 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CorteVip | Agendar</title>
-  <link rel="stylesheet" href="agendar.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agendar - CorteVip</title>
+    <link rel="stylesheet" href="agendar.css" />
 </head>
 <body>
-  <main class="container">
-    <h1 class="logo">Corte<span>vip.site</span></h1>
-    <p class="subtitle">Agende seu horário com facilidade</p>
+    <!-- Barra superior -->
+    <header class="header">
+        <div class="logo">
+            <h1>Cortevip.site</h1>
+        </div>
+    </header>
 
-    <form class="agendamento-form">
-      <label for="nome">Nome completo</label>
-      <input type="text" id="nome" name="nome" placeholder="Seu nome" required />
+    <!-- Área de agendamento -->
+    <main class="agendamento-content">
+        <div class="agendamento-box">
+            <h2>Agendar Horário</h2>
+            <form id="agendamento-form" class="agendamento-form">
+                <div class="form-group">
+                    <label for="nome">Seu Nome:</label>
+                    <input type="text" id="nome" name="nome" required />
+                </div>
 
-      <label for="celular">Celular</label>
-      <input type="tel" id="celular" name="celular" placeholder="(XX) XXXXX-XXXX" required />
+                <div class="form-group">
+                    <label for="celular">Celular:</label>
+                    <input type="tel" id="celular" name="celular" placeholder="(XX) XXXXX-XXXX" required />
+                </div>
 
-      <label for="unidade">Unidade</label>
-      <select id="unidade" name="unidade" required>
-        <option value="" disabled selected>Selecione a unidade</option>
-        <option value="Unidade 1">Unidade 1</option>
-        <option value="Unidade 2">Unidade 2</option>
-      </select>
+                <div class="form-group">
+                    <label for="barbearia">Barbearia:</label>
+                    <select id="barbearia" name="barbearia" required>
+                        <option value="">Selecione a barbearia...</option>
+                        <option value="kataoka-centro">Kataoka's - Centro - SP</option>
+                    </select>
+                </div>
 
-      <label for="barbeiro">Barbeiro</label>
-      <select id="barbeiro" name="barbeiro" required>
-        <option value="" disabled selected>Escolha um barbeiro</option>
-        <option value="Carlos">Carlos</option>
-        <option value="João">João</option>
-        <option value="Pedro">Pedro</option>
-      </select>
+                <div class="form-group">
+                    <label for="barbeiro">Barbeiro:</label>
+                    <select id="barbeiro" name="barbeiro" required>
+                        <option value="">Selecione o barbeiro...</option>
+                        <option value="Paulo">Paulo Kataoka</option>
+                    </select>
+                </div>
 
-      <label for="data">Data</label>
-      <input type="date" id="data" name="data" required />
+                <div class="form-group">
+                    <label for="data">Data:</label>
+                    <input type="date" id="data" name="data" required />
+                </div>
 
-      <label for="hora">Hora</label>
-      <select id="hora" name="hora" required>
-        <!-- Horários preenchidos dinamicamente -->
-      </select>
+                <div class="form-group">
+                    <label for="hora">Hora:</label>
+                    <input type="time" id="hora" name="hora" required />
+                </div>
 
-      <label for="servico">Serviço</label>
-      <input type="text" id="servico" name="servico" placeholder="Corte, barba..." required />
+                <div class="form-group">
+                    <label for="servico">Serviço:</label>
+                    <select id="servico" name="servico" required>
+                        <option value="">Selecione...</option>
+                        <option value="corte">Corte de Cabelo: R$89,99</option>
+                        <option value="barba">Barba: R$64,90</option>
+                        <option value="combo">Corte + Barba: R$149,90</option>
+                        <option value="outro">Outro</option>
+                    </select>
+                </div>
 
-      <button type="submit">Agendar</button>
+                <div class="form-buttons">
+                    <button type="submit">Confirmar Agendamento</button>
+                    <button type="reset">Limpar</button>
+                </div>
 
-      <p id="mensagem"></p>
-    </form>
+                <p id="mensagem"></p>
+            </form>
+        </div>
+    </main>
 
-    <a href="index.html" class="voltar">← Voltar para a página inicial</a>
-    <a href="reagendar.html" class="suporte">Contatar Suporte</a>
-  </main>
+    <!-- Contatar Suporte -->
+    <div class="contatar-suporte">
+        <a href="https://wa.me/seunumero" target="_blank">Contatar Suporte</a>
+        <div class="voltar-inicio">
+            <a href="index.html" class="btn-voltar">← Voltar para Início</a>
+        </div>
+    </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-  <script src="agendar.js"></script>
+    <!-- Banner de Cookies -->
+    <div id="cookie-banner" class="cookie-banner">
+        <p>Este site utiliza cookies para melhorar sua experiência. Ao continuar a navegação, você concorda com o uso de cookies. <a href="política-de-cookies.html">Leia nossa Política de Cookies</a>.</p>
+        <button id="accept-cookies" class="btn primary">Aceitar</button>
+        <button id="decline-cookies" class="btn secondary">Recusar</button>
+    </div>
+
+    <!-- Rodapé -->
+    <footer>
+        <p class="version-info">Versão 1.0 - Cortevip.site - © 2025 Paulo Cesar Kataoka. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="agendar.js"></script>
 </body>
 </html>
-
