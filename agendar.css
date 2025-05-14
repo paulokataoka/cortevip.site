@@ -173,51 +173,8 @@ footer {
     display: none;
 }
 
-.cookie-banner p {
-    margin: 0;
-    font-size: 1rem;
-}
+.cookie
 
-.cookie-banner a {
-    color: #32cd32;
-    text-decoration: none;
-}
-
-.cookie-banner button {
-    margin-top: 1rem;
-    font-size: 1rem;
-    padding: 0.7rem 1.5rem;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    background-color: #28a745;
-    color: white;
-    border: none;
-}
-
-.cookie-banner button:hover {
-    background-color: #218838;
-}
-
-/* Responsividade para telas pequenas */
-@media (max-width: 480px) {
-    .agendamento-box {
-        padding: 20px;
-        width: 90%;
-    }
-
-    .agendamento-box h2 {
-        font-size: 1.5rem;
-    }
-
-    .form-buttons button {
-        width: 48%;
-    }
-
-    .form-buttons button[type="reset"] {
-        margin-left: 4%;
-    }
-}
 
 
 
