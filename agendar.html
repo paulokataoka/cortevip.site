@@ -1,104 +1,116 @@
-<!DOCTYPE html>
-<html lang="pt">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Agendar - CorteVip</title>
-    <link rel="stylesheet" href="agendar.css" />
-</head>
-<body>
-    <!-- Barra superior -->
-    <header class="header">
-        <div class="logo">
-            <h1>Cortevip.site</h1>
-        </div>
-    </header>
-
-    <!-- Área de agendamento -->
-    <main class="agendamento-content">
-        <div class="agendamento-box">
-            <h2>Agendar Horário</h2>
-            <form id="agendamento-form" class="agendamento-form">
-                <div class="form-group">
-                    <label for="nome">Seu Nome:</label>
-                    <input type="text" id="nome" name="nome" required />
-                </div>
-
-                <div class="form-group">
-                    <label for="celular">Celular:</label>
-                    <input type="tel" id="celular" name="celular" placeholder="(XX) XXXXX-XXXX" required />
-                </div>
-
-                <div class="form-group">
-                    <label for="barbearia">Barbearia:</label>
-                    <select id="barbearia" name="barbearia" required>
-                        <option value="">Selecione a barbearia...</option>
-                        <option value="kataoka-centro">Kataoka's - Centro - SP</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="barbeiro">Barbeiro:</label>
-                    <select id="barbeiro" name="barbeiro" required>
-                        <option value="">Selecione o barbeiro...</option>
-                        <option value="Paulo">Paulo Kataoka</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="data">Data:</label>
-                    <input type="date" id="data" name="data" required />
-                </div>
-
-                <div class="form-group">
-                    <label for="hora">Hora:</label>
-                    <input type="time" id="hora" name="hora" required />
-                </div>
-
-                <div class="form-group">
-                    <label for="servico">Serviço:</label>
-                    <select id="servico" name="servico" required>
-                        <option value="">Selecione...</option>
-                        <option value="corte">Corte de Cabelo: R$89,99</option>
-                        <option value="barba">Barba: R$64,90</option>
-                        <option value="combo">Corte + Barba: R$149,90</option>
-                        <option value="outro">Outro</option>
-                    </select>
-                </div>
-
-                <div class="form-buttons">
-                    <button type="submit">Confirmar Agendamento</button>
-                    <button type="reset">Limpar</button>
-                </div>
-
-                <p id="mensagem"></p>
-            </form>
-        </div>
-    </main>
-
-    <!-- Contatar Suporte -->
-    <div class="contatar-suporte">
-        <a href="https://wa.me/seunumero" target="_blank">Contatar Suporte</a>
-        <div class="voltar-inicio">
-            <a href="index.html" class="btn-voltar">← Voltar para Início</a>
-        </div>
+<!-- HTML do formulário de agendamento -->
+<form id="agendamento-form">
+    <div class="form-group">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required />
     </div>
 
-    <!-- Banner de Cookies -->
-    <div id="cookie-banner" class="cookie-banner">
-        <p>Este site utiliza cookies para melhorar sua experiência. Ao continuar a navegação, você concorda com o uso de cookies. <a href="política-de-cookies.html">Leia nossa Política de Cookies</a>.</p>
-        <button id="accept-cookies" class="btn primary">Aceitar</button>
-        <button id="decline-cookies" class="btn secondary">Recusar</button>
+    <div class="form-group">
+        <label for="celular">Celular:</label>
+        <input type="text" id="celular" name="celular" required />
     </div>
 
-    <!-- Rodapé -->
-    <footer>
-        <p class="version-info">Versão 1.0 - Cortevip.site - © 2025 Paulo Cesar Kataoka. Todos os direitos reservados.</p>
-    </footer>
+    <div class="form-group">
+        <label for="barbearia">Barbearia:</label>
+        <input type="text" id="barbearia" name="barbearia" required />
+    </div>
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="agendar.js"></script>
-</body>
-</html>
+    <div class="form-group">
+        <label for="barbeiro">Barbeiro:</label>
+        <input type="text" id="barbeiro" name="barbeiro" required />
+    </div>
 
+    <div class="form-group">
+        <label for="data">Data:</label>
+        <input type="date" id="data" name="data" required />
+    </div>
+
+    <div class="form-group">
+        <label for="hora">Hora:</label>
+        <input type="time" id="hora" name="hora" min="09:00" max="18:00" step="3600" required />
+    </div>
+
+    <div class="form-group">
+        <label for="servico">Serviço:</label>
+        <input type="text" id="servico" name="servico" required />
+    </div>
+
+    <button type="submit">Agendar</button>
+
+    <p id="mensagem"></p>
+</form>
+
+<script>
+// Função para verificar se o horário já está ocupado
+async function verificarHorarioOcupado(data, hora) {
+    // Simulação de consulta ao banco de dados para verificar agendamento
+    const { data: agendamentos, error } = await supabase
+        .from('agendamentos')
+        .select('*')
+        .eq('data', data)
+        .eq('hora', hora);
+
+    if (agendamentos.length > 0) {
+        return true; // Horário ocupado
+    }
+    return false; // Horário livre
+}
+
+// Função para verificar e salvar o agendamento
+const form = document.getElementById("agendamento-form");
+const mensagemElement = document.getElementById("mensagem");
+
+form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    // Coleta de dados do formulário
+    const nome = document.getElementById("nome").value;
+    const celular = document.getElementById("celular").value;
+    const barbearia = document.getElementById("barbearia").value;
+    const barbeiro = document.getElementById("barbeiro").value;
+    const data = document.getElementById("data").value;
+    const hora = document.getElementById("hora").value;
+    const servico = document.getElementById("servico").value;
+
+    // Verifica se todos os campos foram preenchidos
+    if (!nome || !celular || !barbearia || !barbeiro || !data || !hora || !servico) {
+        mensagemElement.textContent = "Por favor, preencha todos os campos.";
+        mensagemElement.style.color = "red";
+        return;
+    }
+
+    // Verifica se o horário está ocupado
+    const horarioOcupado = await verificarHorarioOcupado(data, hora);
+    if (horarioOcupado) {
+        mensagemElement.textContent = "Este horário já está ocupado. Por favor, escolha outro.";
+        mensagemElement.style.color = "red";
+        return;
+    }
+
+    // Simulação de chamada para salvar no banco (Supabase)
+    // Após sucesso na inserção, exibir mensagem de confirmação
+    const { error } = await supabase
+        .from('agendamentos')
+        .insert([
+            {
+                nome,
+                celular,
+                barbearia,
+                barbeiro,
+                data,
+                hora,
+                servico,
+            }
+        ]);
+
+    if (error) {
+        mensagemElement.textContent = "Erro ao realizar o agendamento. Tente novamente.";
+        mensagemElement.style.color = "red";
+    } else {
+        mensagemElement.textContent = "Agendamento realizado com sucesso!";
+        mensagemElement.style.color = "green";
+        // Limpa os campos do formulário
+        form.reset();
+    }
+});
+</script>
