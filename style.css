@@ -6,11 +6,14 @@
 
 html, body {
   height: 100%;
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: background-color 0.3s, color 0.3s;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  transition: background-color 0.3s, color 0.3s;
+  background-color: var(--bg);
+  color: var(--text);
+  padding: 1rem;
 }
 
 /* Tema dinâmico com suporte a modo escuro/claro */
@@ -42,18 +45,27 @@ html, body {
 }
 
 body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   background-color: var(--bg);
   color: var(--text);
-  padding: 1rem;
 }
 
 /* Container principal */
 .container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
   padding: 2rem 1rem;
   max-width: 480px;
   width: 100%;
   background-color: transparent;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
 /* Logo estilizada */
