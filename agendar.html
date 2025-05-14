@@ -1,94 +1,56 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="light">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Agendar - CorteVip</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CorteVip | Agendar</title>
   <link rel="stylesheet" href="agendar.css" />
 </head>
 <body>
-  <header class="header">
-    <h1>Agendamento CorteVip</h1>
-  </header>
+  <main class="container">
+    <h1 class="logo">Corte<span>vip.site</span></h1>
+    <p class="subtitle">Agende seu horário com facilidade</p>
 
-  <main class="agendamento-content">
-    <div class="agendamento-box">
-      <h2>Preencha seus dados</h2>
-      <form class="agendamento-form">
-        <div class="form-group">
-          <label for="nome">Nome completo</label>
-          <input type="text" id="nome" required />
-        </div>
+    <form class="agendamento-form">
+      <label for="nome">Nome completo</label>
+      <input type="text" id="nome" name="nome" placeholder="Seu nome" required />
 
-        <div class="form-group">
-          <label for="celular">Celular (WhatsApp)</label>
-          <input type="tel" id="celular" required />
-        </div>
+      <label for="celular">Celular</label>
+      <input type="tel" id="celular" name="celular" placeholder="(XX) XXXXX-XXXX" required />
 
-        <div class="form-group">
-          <label for="unidade">Unidade</label>
-          <select id="unidade" required>
-            <option value="">Selecione</option>
-            <option value="Centro">Centro</option>
-            <option value="Zona Norte">Zona Norte</option>
-            <option value="Zona Sul">Zona Sul</option>
-          </select>
-        </div>
+      <label for="unidade">Unidade</label>
+      <select id="unidade" name="unidade" required>
+        <option value="" disabled selected>Selecione a unidade</option>
+        <option value="Unidade 1">Unidade 1</option>
+        <option value="Unidade 2">Unidade 2</option>
+      </select>
 
-        <div class="form-group">
-          <label for="barbeiro">Barbeiro</label>
-          <select id="barbeiro" required>
-            <option value="">Selecione</option>
-            <option value="Lucas">Lucas</option>
-            <option value="Rafael">Rafael</option>
-            <option value="Tiago">Tiago</option>
-          </select>
-        </div>
+      <label for="barbeiro">Barbeiro</label>
+      <select id="barbeiro" name="barbeiro" required>
+        <option value="" disabled selected>Escolha um barbeiro</option>
+        <option value="Carlos">Carlos</option>
+        <option value="João">João</option>
+        <option value="Pedro">Pedro</option>
+      </select>
 
-        <div class="form-group">
-          <label for="data">Data</label>
-          <input type="date" id="data" required />
-        </div>
+      <label for="data">Data</label>
+      <input type="date" id="data" name="data" required />
 
-        <div class="form-group">
-          <label for="hora">Horário</label>
-          <select id="hora" required>
-            <option value="">Selecione a data</option>
-          </select>
-        </div>
+      <label for="hora">Hora</label>
+      <select id="hora" name="hora" required>
+        <!-- preenchido via JS -->
+      </select>
 
-        <div class="form-group">
-          <label for="servico">Serviço</label>
-          <select id="servico" required>
-            <option value="">Selecione</option>
-            <option value="Corte">Corte</option>
-            <option value="Corte + Barba">Corte + Barba</option>
-            <option value="Sobrancelha">Sobrancelha</option>
-          </select>
-        </div>
+      <label for="servico">Serviço</label>
+      <input type="text" id="servico" name="servico" placeholder="Corte, barba..." required />
 
-        <div class="form-buttons">
-          <button type="submit">Agendar</button>
-          <button type="reset">Limpar</button>
-        </div>
-      </form>
-    </div>
+      <button type="submit">Agendar</button>
+
+      <p id="mensagem"></p>
+    </form>
+
+    <a href="index.html" class="voltar">← Voltar para a página inicial</a>
   </main>
-
-  <div class="voltar-inicio">
-    <a href="index.html" class="btn-voltar">← Voltar ao início</a>
-  </div>
-
-  <footer>
-    CorteVip © 2025 – Todos os direitos reservados
-  </footer>
-
-  <!-- Banner de Cookies -->
-  <div id="cookie-banner" class="cookie-banner">
-    <p>Usamos cookies para melhorar sua experiência. <a href="#">Saiba mais</a></p>
-    <button id="accept-cookies">Aceitar</button>
-    <button id="decline-cookies">Recusar</button>
-  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
   <script src="agendar.js"></script>
