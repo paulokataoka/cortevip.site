@@ -252,12 +252,11 @@ footer.rodape a:hover {
     opacity: 1;
   }
 }
-body {
-  background: linear-gradient(45deg, #6a11cb, #2575fc);
-  background-size: 400% 400%;
-  animation: gradientAnimation 15s ease infinite;
-}
 
+/* Removendo animação de gradiente, criando um fundo fixo */
+body {
+  background: linear-gradient(45deg, #6a11cb, #2575fc);  /* Gradiente fixo */
+}
 
 /* Estilos do Chatbot */
 .chatbot {
@@ -343,4 +342,3 @@ body {
 .chat-input button:hover {
   background-color: #28a428;
 }
-
