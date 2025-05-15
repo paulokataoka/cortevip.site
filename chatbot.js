@@ -1,122 +1,154 @@
-let chatWindowVisible = false;
-let isWelcomeMessageSent = false; // Variável para verificar se a saudação já foi enviada
+// Inicialização do Supabase
+const supabaseUrl = 'https://smfeazihfcqmtmmnhknm.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNtZmVhemloZmNxbXRtbW5oa25tIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDYzNzMzOTcsImV4cCI6MjA2MTk0OTM5N30.iiFgvwJ89Jnm6Z5HDJm24LJrwhK_3tc_arHzDMOZvwc';
 
-// Função para alternar a visibilidade da janela do chat
+const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+let chatWindowVisible = false;
+let isWelcomeMessageSent = false;
+let cadastroEtapa = 0;
+let cadastroBarbearia = { nome: "", endereco: "", telefone: "", servicos: "" };
+
 function toggleChatWindow() {
   const chatWindow = document.getElementById('chatWindow');
-  chatWindow.style.display = chatWindowVisible ? 'none' : 'flex';
-  chatWindowVisible = !chatWindowVisible;
-
-  // Enviar a mensagem de boas-vindas se for a primeira vez que o chat é aberto
-  if (!isWelcomeMessageSent) {
-    sendWelcomeMessage();
+  if (chatWindowVisible) {
+    chatWindow.style.display = 'none';
+  } else {
+    chatWindow.style.display = 'flex';
+    if (!isWelcomeMessageSent) {
+      sendWelcomeMessage();
+    }
   }
+  chatWindowVisible = !chatWindowVisible;
 }
 
-// Função para enviar a mensagem de boas-vindas
 function sendWelcomeMessage() {
   const chatContent = document.querySelector('.chat-content');
+  chatContent.innerHTML = ''; // Limpa mensagens anteriores
+
   const botWelcome = document.createElement('div');
   botWelcome.classList.add('message', 'bot-message');
-  botWelcome.textContent = "Olá! Bem-vindo ao CorteVip! Como posso ajudá-lo hoje?";
+  botWelcome.textContent = "Olá! Tudo bem? Vamos fazer o cadastro da sua barbearia. Posso te perguntar algumas coisas rapidinho?";
   chatContent.appendChild(botWelcome);
 
-  // Botões de opções
   const botButtons = document.createElement('div');
   botButtons.classList.add('chat-buttons');
-  botButtons.innerHTML = `
-    <button onclick="handleUserSelection('Cadastrar Barbearia')">Cadastrar Barbearia</button>
-    <button onclick="handleUserSelection('Encontrar Barbearia')">Encontrar Barbearia</button>
-    <button onclick="handleUserSelection('Agendar Horário')">Agendar Horário</button>
-    <button onclick="handleUserSelection('Localização')">Localização</button>
-  `;
+  botButtons.innerHTML = `<button onclick="iniciarCadastro()">Sim, claro!</button>`;
   chatContent.appendChild(botButtons);
 
-  // Scroll até a última mensagem
   chatContent.scrollTop = chatContent.scrollHeight;
-
-  // Marcar que a saudação foi enviada
   isWelcomeMessageSent = true;
 }
 
-// Função para enviar uma mensagem do usuário
+function iniciarCadastro() {
+  document.querySelector('.chat-buttons')?.remove();
+  cadastroEtapa = 1;
+  fazerPergunta();
+}
+
 function sendMessage() {
-  const userMessage = document.getElementById('userMessage').value.trim();
+  const userInput = document.getElementById('userMessage');
+  const userMessage = userInput.value.trim();
 
-  if (userMessage) {
-    const chatContent = document.querySelector('.chat-content');
-    
-    // Adiciona a mensagem do usuário
-    const userMessageElement = document.createElement('div');
-    userMessageElement.classList.add('message', 'user-message');
-    userMessageElement.textContent = userMessage;
-    chatContent.appendChild(userMessageElement);
+  if (!userMessage) return;
 
-    // Resposta do bot
-    const botResponse = document.createElement('div');
-    botResponse.classList.add('message', 'bot-message');
-    botResponse.textContent = getBotResponse(userMessage);
-    chatContent.appendChild(botResponse);
-
-    // Limpar o campo de entrada
-    document.getElementById('userMessage').value = '';
-
-    // Scroll até a última mensagem
-    chatContent.scrollTop = chatContent.scrollHeight;
-  }
-}
-
-// Função que gera a resposta do bot
-function getBotResponse(userMessage) {
-  let response = "";
-  const lowerMessage = userMessage.toLowerCase();
-
-  if (lowerMessage.includes("cadastrar barbearia")) {
-    response = "Por favor, forneça o nome, endereço e os serviços que você oferece.";
-  } 
-  
-  else if (lowerMessage.includes("encontrar barbearia")) {
-    response = "Informe a sua localização ou o nome da barbearia para encontrar.";
-  }
-
-  else if (lowerMessage.includes("agendar horário")) {
-    response = "Diga-me a barbearia de sua escolha e o horário desejado.";
-  }
-
-  else if (lowerMessage.includes("localização")) {
-    response = "Por favor, me forneça sua localização para que eu possa encontrar a barbearia mais próxima.";
-  }
-
-  else {
-    response = "Desculpe, não entendi. Como posso te ajudar?";
-  }
-
-  return response;
-}
-
-// Função que lida com a seleção de botões
-function handleUserSelection(selection) {
   const chatContent = document.querySelector('.chat-content');
 
-  // Adiciona a escolha do usuário
+  // Adiciona mensagem do usuário
   const userMessageElement = document.createElement('div');
   userMessageElement.classList.add('message', 'user-message');
-  userMessageElement.textContent = selection;
+  userMessageElement.textContent = userMessage;
   chatContent.appendChild(userMessageElement);
 
-  // Resposta do bot baseada na escolha
-  const botResponse = document.createElement('div');
-  botResponse.classList.add('message', 'bot-message');
-  botResponse.textContent = getBotResponse(selection);
-  chatContent.appendChild(botResponse);
+  userInput.value = '';
+  chatContent.scrollTop = chatContent.scrollHeight;
 
-  // Scroll até a última mensagem
+  // Processa a resposta do usuário para o chatbot
+  processarResposta(userMessage);
+}
+
+function processarResposta(resposta) {
+  switch (cadastroEtapa) {
+    case 1:
+      cadastroBarbearia.nome = resposta;
+      cadastroEtapa++;
+      fazerPergunta();
+      break;
+    case 2:
+      cadastroBarbearia.endereco = resposta;
+      cadastroEtapa++;
+      fazerPergunta();
+      break;
+    case 3:
+      cadastroBarbearia.telefone = resposta;
+      cadastroEtapa++;
+      fazerPergunta();
+      break;
+    case 4:
+      cadastroBarbearia.servicos = resposta;
+      cadastroEtapa++;
+      fazerPergunta();
+      break;
+    default:
+      enviarMensagemBot("Se precisar de algo mais, estou por aqui!");
+      break;
+  }
+}
+
+function fazerPergunta() {
+  switch (cadastroEtapa) {
+    case 1:
+      enviarMensagemBot("Primeiro, qual o nome da sua barbearia?");
+      break;
+    case 2:
+      enviarMensagemBot("Show! Agora me diga o endereço completo.");
+      break;
+    case 3:
+      enviarMensagemBot("Beleza. Qual o telefone para contato?");
+      break;
+    case 4:
+      enviarMensagemBot("E por último, quais serviços sua barbearia oferece?");
+      break;
+    case 5:
+      enviarMensagemBot("Cadastro finalizado! Obrigado! 🎉");
+      enviarMensagemBot(`Resumo:\n• Nome: ${cadastroBarbearia.nome}\n• Endereço: ${cadastroBarbearia.endereco}\n• Telefone: ${cadastroBarbearia.telefone}\n• Serviços: ${cadastroBarbearia.servicos}`);
+      salvarCadastro();
+      break;
+  }
+}
+
+function enviarMensagemBot(mensagem) {
+  const chatContent = document.querySelector('.chat-content');
+  const botMessage = document.createElement('div');
+  botMessage.classList.add('message', 'bot-message');
+  botMessage.textContent = mensagem;
+  chatContent.appendChild(botMessage);
   chatContent.scrollTop = chatContent.scrollHeight;
 }
 
-// Quando a janela de chat carregar, enviar boas-vindas (só se ainda não foi enviada)
-document.addEventListener("DOMContentLoaded", function() {
-  if (!isWelcomeMessageSent) {
-    sendWelcomeMessage();
+async function salvarCadastro() {
+  const { data, error } = await supabase
+    .from('barbearias') // Confirme que esta tabela existe no Supabase
+    .insert([
+      {
+        nome: cadastroBarbearia.nome,
+        endereco: cadastroBarbearia.endereco,
+        telefone: cadastroBarbearia.telefone,
+        servicos: cadastroBarbearia.servicos,
+      },
+    ]);
+
+  if (error) {
+    console.error("Erro ao salvar:", error.message);
+    enviarMensagemBot("❌ Ocorreu um erro ao salvar seu cadastro. Tente novamente.");
+  } else {
+    enviarMensagemBot("✅ Cadastro salvo com sucesso no nosso sistema! ✂️");
   }
+}
+
+// Para já enviar a mensagem de boas-vindas quando o chat for aberto pela primeira vez
+document.addEventListener("DOMContentLoaded", () => {
+  // Não envia automaticamente para não confundir usuário
+  // A mensagem será enviada ao abrir o chat pela primeira vez
 });
+
