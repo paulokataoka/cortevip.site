@@ -30,7 +30,7 @@
     <div class="chat-header" onclick="toggleChatWindow()">
       <span>💬</span> <span>Chat com a gente!</span>
     </div>
-    <div class="chat-window" id="chatWindow">
+    <div class="chat-window" id="chatWindow" style="display:none;">
       <div class="chat-content">
         <div class="message bot-message">Olá, como posso te ajudar?</div>
       </div>
@@ -41,9 +41,13 @@
     </div>
   </div>
 
-  <!-- Script principal -->
+  <!-- Importa Supabase.js via CDN ANTES dos seus scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/supabase.min.js"></script>
+
+  <!-- Seus scripts -->
   <script src="index.js"></script>
-  <script src="chatbot.js"></script> <!-- Aqui está a referência ao seu chatbot.js -->
+  <script src="chatbot.js"></script>
 </body>
 </html>
+
 
