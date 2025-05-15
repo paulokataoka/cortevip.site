@@ -31,9 +31,7 @@
       <span>💬</span> <span>Chat com a gente!</span>
     </div>
     <div class="chat-window" id="chatWindow" style="display:none;">
-      <div class="chat-content">
-        <div class="message bot-message">Olá, como posso te ajudar?</div>
-      </div>
+      <div class="chat-content"></div>
       <div class="chat-input">
         <input type="text" id="userMessage" placeholder="Digite sua mensagem..." />
         <button onclick="sendMessage()">Enviar</button>
@@ -41,11 +39,10 @@
     </div>
   </div>
 
-  <!-- Importa Supabase.js via CDN ANTES dos seus scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/supabase.min.js"></script>
+  <!-- Biblioteca Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-  <!-- Seus scripts -->
-  <script src="index.js"></script>
+  <!-- Script do chatbot -->
   <script src="chatbot.js"></script>
 </body>
 </html>
