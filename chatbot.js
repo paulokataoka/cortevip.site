@@ -1,7 +1,6 @@
 // Inicialização do Supabase
 const supabaseUrl = 'https://smfeazihfcqmtmmnhknm.supabase.co';
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNtZmVhemloZmNxbXRtbW5oa25tIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDYzNzMzOTcsImV4cCI6MjA2MTk0OTM5N30.iiFgvwJ89Jnm6Z5HDJm24LJrwhK_3tc_arHzDMOZvwc';
-
 const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
 
 let chatWindowVisible = false;
@@ -24,7 +23,7 @@ function toggleChatWindow() {
 
 function sendWelcomeMessage() {
   const chatContent = document.querySelector('.chat-content');
-  chatContent.innerHTML = ''; // Limpa mensagens anteriores
+  chatContent.innerHTML = '';
 
   const botWelcome = document.createElement('div');
   botWelcome.classList.add('message', 'bot-message');
@@ -54,7 +53,6 @@ function sendMessage() {
 
   const chatContent = document.querySelector('.chat-content');
 
-  // Adiciona mensagem do usuário
   const userMessageElement = document.createElement('div');
   userMessageElement.classList.add('message', 'user-message');
   userMessageElement.textContent = userMessage;
@@ -63,7 +61,6 @@ function sendMessage() {
   userInput.value = '';
   chatContent.scrollTop = chatContent.scrollHeight;
 
-  // Processa a resposta do usuário para o chatbot
   processarResposta(userMessage);
 }
 
@@ -127,8 +124,8 @@ function enviarMensagemBot(mensagem) {
 }
 
 async function salvarCadastro() {
-  const { data, error } = await supabase
-    .from('barbearias') // Confirme que esta tabela existe no Supabase
+  const { data, error } = await supabaseClient
+    .from('barbearias')
     .insert([
       {
         nome: cadastroBarbearia.nome,
@@ -146,9 +143,6 @@ async function salvarCadastro() {
   }
 }
 
-// Para já enviar a mensagem de boas-vindas quando o chat for aberto pela primeira vez
 document.addEventListener("DOMContentLoaded", () => {
-  // Não envia automaticamente para não confundir usuário
-  // A mensagem será enviada ao abrir o chat pela primeira vez
+  // Espera o usuário abrir o chat
 });
-
