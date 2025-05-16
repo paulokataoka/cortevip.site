@@ -29,6 +29,19 @@
     <p class="subtitle">Reagende ou solicite o cancelamento do seu horário</p>
 
     <form id="reagendar-form">
+      <label for="barbearia">Barbearia</label>
+      <input type="text" id="barbearia" name="barbearia" placeholder="Nome da barbearia" required />
+
+      <label for="barbeiro">Barbeiro</label>
+      <input type="text" id="barbeiro" name="barbeiro" placeholder="Nome do barbeiro" required />
+
+      <label for="tipo-solicitacao">Tipo de solicitação</label>
+      <select id="tipo-solicitacao" name="tipo" required>
+        <option value="" disabled selected>Selecione uma opção</option>
+        <option value="reagendar">Reagendar</option>
+        <option value="cancelar">Cancelar</option>
+      </select>
+
       <label for="nome">Nome completo</label>
       <input type="text" id="nome" name="nome" placeholder="Seu nome" required />
 
