@@ -26,8 +26,7 @@
         <label for="barbearia">Barbearia:</label>
         <select id="barbearia" name="barbearia" required>
           <option value="">Selecione uma barbearia</option>
-          <option value="barbearia1">Barbearia 1 - Vila São José, estado de São Paulo</option>
-          <option value="barbearia2">Oportunidade</option>
+          <option value="a7e2c9d8-4c1f-4f43-b76e-123456789abc">Barbearia 1 - Vila São José, estado de São Paulo</option>
         </select>
       </div>
 
@@ -35,7 +34,7 @@
         <label for="barbeiro">Barbeiro:</label>
         <select id="barbeiro" name="barbeiro" required>
           <option value="">Selecione um barbeiro</option>
-          <option value="barbeiro1">Paulo Kataoka</option>
+          <!-- Opções serão preenchidas via JavaScript com UUID -->
         </select>
       </div>
 
@@ -90,6 +89,14 @@
     </footer>
   </div>
 
+  <!-- Supabase CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script>
+    const supabaseClient = supabase.createClient(
+      'https://smfeazihfcqmtmmnhknm.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNtZmVhemloZmNxbXRtbW5oa25tIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDYzNzMzOTcsImV4cCI6MjA2MTk0OTM5N30.iiFgvwJ89Jnm6Z5HDJm24LJrwhK_3tc_arHzDMOZvwc'
+    );
+  </script>
   <script src="agendar.js"></script>
 </body>
 </html>
