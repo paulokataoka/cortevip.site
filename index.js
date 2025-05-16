@@ -16,38 +16,41 @@ document.addEventListener("DOMContentLoaded", () => {
     document.documentElement.setAttribute("data-theme", "light");
   }
 
-  // Efeito de digitação automática no subtítulo
+  // Efeito de digitação automática no subtítulo, versão melhorada
   const frases = [
     "Agende seu corte com facilidade.",
     "Seu estilo começa aqui.",
     "CorteVip. Simples. Rápido. Profissional."
   ];
 
-  let i = 0; // índice da frase
-  let j = 0; // índice da letra
+  let i = 0; // índice da frase atual
+  let j = 0; // índice da letra atual
   let apagando = false;
-  const speed = 100;
-  const delayEntreFrases = 2000;
+  const velocidadeDigitar = 60;      // tempo entre letras na digitação
+  const velocidadeApagar = 30;       // tempo entre letras na exclusão
+  const delayEntreFrases = 1500;     // pausa após digitar/apagar a frase
   const typedText = document.getElementById("typed-text");
 
   function digitar() {
     const fraseAtual = frases[i];
+
     if (!apagando && j <= fraseAtual.length) {
       typedText.textContent = fraseAtual.substring(0, j++);
-      setTimeout(digitar, speed);
+      setTimeout(digitar, velocidadeDigitar);
     } else if (apagando && j >= 0) {
       typedText.textContent = fraseAtual.substring(0, j--);
-      setTimeout(digitar, speed / 2);
+      setTimeout(digitar, velocidadeApagar);
     } else {
+      // Quando termina de digitar e apagar, alterna estado
       apagando = !apagando;
       if (!apagando) {
-        i = (i + 1) % frases.length;
+        i = (i + 1) % frases.length;  // passa para a próxima frase circularmente
       }
       setTimeout(digitar, delayEntreFrases);
     }
   }
 
-  digitar(); // Iniciar a digitação após o carregamento
+  digitar(); // iniciar digitação
 });
 
 
