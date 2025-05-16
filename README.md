@@ -1,8 +1,11 @@
-# Meu Site Pessoal
+# CorteVip.Site
 
-Site criado por **Paulo Cesar Kataoka**.
+Projeto privado para solução de agendamento em barbearias.
 
-## 🚫 Direitos autorais
-Todo o código presente neste repositório é protegido. Não é permitido uso comercial, cópia ou modificação sem autorização.
+⚠️ **Aviso:** Este repositório é de uso exclusivo da empresa e não está aberto para uso ou contribuição externa.
 
-© 2025 Paulo Kataoka. Todos os direitos reservados.
+---
+Paulo Cesar Kataoka.
+  
+[GitHub](https://github.com/paulokataoka)
+
