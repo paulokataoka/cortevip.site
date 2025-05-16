@@ -27,7 +27,7 @@ function sendWelcomeMessage() {
 
   const botWelcome = document.createElement('div');
   botWelcome.classList.add('message', 'bot-message');
-  botWelcome.textContent = "Olá! Tudo bem? Vamos fazer o cadastro da sua barbearia. Posso te perguntar algumas coisas rapidinho?";
+  botWelcome.textContent = "Olá! Tudo bem? Vamos fazer o Pré-cadastro da sua barbearia. Posso te perguntar algumas coisas rapidinho?";
   chatContent.appendChild(botWelcome);
 
   const botButtons = document.createElement('div');
