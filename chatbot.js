@@ -107,7 +107,7 @@ function fazerPergunta() {
       enviarMensagemBot("E por último, quais serviços sua barbearia oferece?");
       break;
     case 5:
-      enviarMensagemBot("Cadastro finalizado! Obrigado! 🎉");
+      enviarMensagemBot("Cadastro finalizado! Obrigado.Nosso time entrará em contato! 🎉");
       enviarMensagemBot(`Resumo:\n• Nome: ${cadastroBarbearia.nome}\n• Endereço: ${cadastroBarbearia.endereco}\n• Telefone: ${cadastroBarbearia.telefone}\n• Serviços: ${cadastroBarbearia.servicos}`);
       salvarCadastro();
       break;
