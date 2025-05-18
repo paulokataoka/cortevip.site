@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("agendamento-form");
   const mensagem = document.getElementById("mensagem");
   const barbeiroSelect = document.getElementById("barbeiro");
+  const barbeariaSelect = document.getElementById("barbearia");
 
   // Exemplo de barbeiros com UUID - substitua pelos reais do seu banco
   const barbeiros = [
@@ -21,25 +22,43 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Função para carregar barbearias do Supabase
+  async function carregarBarbearias() {
+    const { data, error } = await supabase
+      .from("barbearias")
+      .select("id, nome");
+
+    if (error) {
+      barbeariaSelect.innerHTML = '<option value="">Erro ao carregar barbearias</option>';
+      return;
+    }
+
+    barbeariaSelect.innerHTML = '<option value="">Selecione uma barbearia</option>';
+    data.forEach(b => {
+      const option = document.createElement("option");
+      option.value = b.id;
+      option.textContent = b.nome;
+      barbeariaSelect.appendChild(option);
+    });
+  }
+
   popularBarbeiros();
+  carregarBarbearias();
 
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
-    // Limpa mensagens anteriores
     mensagem.textContent = "";
     mensagem.className = "mensagem";
 
-    // Coleta os dados do formulário
     const nome = document.getElementById("nome").value.trim();
     const celular = document.getElementById("celular").value.trim();
-    const barbearia = document.getElementById("barbearia").value;
+    const barbearia = barbeariaSelect.value;
     const barbeiro = barbeiroSelect.value;
     const data = document.getElementById("data").value;
     const hora = document.getElementById("hora").value;
     const servico = document.getElementById("servico").value;
 
-    // Validação básica
     if (!nome || !celular || !barbearia || !barbeiro || !data || !hora || !servico) {
       exibirMensagem("Por favor, preencha todos os campos obrigatórios.", "erro");
       return;
@@ -48,13 +67,13 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       exibirMensagem("Verificando disponibilidade...", "carregando");
 
-      // Verifica se já existe um agendamento para a mesma data, hora e barbeiro
-      const { data: agendamentosExistentes, error: erroConsulta } = await supabaseClient
+      const { data: agendamentosExistentes, error: erroConsulta } = await supabase
         .from("agendamentos")
         .select("*")
         .eq("data", data)
         .eq("hora", hora)
-        .eq("barbeiro", barbeiro);
+        .eq("barbeiro", barbeiro)
+        .eq("barbearia_id", barbearia);
 
       if (erroConsulta) throw erroConsulta;
 
@@ -63,14 +82,13 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      // Envia os dados para o Supabase
-      const { error: erroInsercao } = await supabaseClient
+      const { error: erroInsercao } = await supabase
         .from("agendamentos")
         .insert([
           {
             nome,
             celular,
-            barbearia,
+            barbearia_id: barbearia,
             barbeiro,
             data,
             hora,
