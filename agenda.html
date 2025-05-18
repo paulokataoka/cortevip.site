@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agenda da Barbearia - CorteVip</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="container">
+    <h1>Agenda da Barbearia</h1>
+
+    <section class="filtros">
+      <label for="barbearia">Selecione a barbearia:</label>
+      <select id="barbearia" disabled>
+        <option value="">Carregando barbearias...</option>
+      </select>
+
+      <label for="data">Data:</label>
+      <input type="date" id="data" />
+
+      <button id="consultar" disabled>Consultar</button>
+    </section>
+
+    <section id="resultados">
+      <!-- Resultados aparecem aqui -->
+    </section>
+  </main>
+
+  <!-- Biblioteca Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+  <!-- Configura URL e KEY do Supabase -->
+  <script>
+    const supabaseUrl = "https://smfeazihfcqmtmmnhknm.supabase.co";
+    const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNtZmVhemloZmNxbXRtbW5oa25tIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDYzNzMzOTcsImV4cCI6MjA2MTk0OTM5N30.iiFgvwJ89Jnm6Z5HDJm24LJrwhK_3tc_arHzDMOZvwc";
+    window.supabase = supabase.createClient(supabaseUrl, supabaseKey);
+  </script>
+
+  <!-- Seu código JS que usa supabase -->
+  <script src="agenda.js"></script>
+</body>
+</html>
+
+
+
+
