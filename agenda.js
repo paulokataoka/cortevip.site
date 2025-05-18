@@ -1,37 +1,3 @@
-const barbeariaSelect = document.getElementById("barbearia");
-const dataInput = document.getElementById("data");
-const consultarBtn = document.getElementById("consultar");
-const resultados = document.getElementById("resultados");
-
-// Define data de hoje por padrão
-dataInput.valueAsDate = new Date();
-
-// Carrega barbearias ao abrir a página
-document.addEventListener("DOMContentLoaded", async () => {
-  await carregarBarbearias();
-  buscarAgenda(); // opcional: já mostra a agenda do dia atual para a primeira barbearia
-});
-
-consultarBtn.addEventListener("click", buscarAgenda);
-
-async function carregarBarbearias() {
-  const { data, error } = await supabase
-    .from("agendamentos")
-    .select("barbearia")
-    .neq("barbearia", null);
-
-  if (error || !data) {
-    barbeariaSelect.innerHTML = `<option value="">Erro ao carregar</option>`;
-    return;
-  }
-
-  const barbeariasUnicas = [...new Set(data.map(item => item.barbearia))];
-
-  barbeariaSelect.innerHTML = barbeariasUnicas.map(nome => `
-    <option value="${nome}">${nome}</option>
-  `).join("");
-}
-
 async function buscarAgenda() {
   const barbearia = barbeariaSelect.value;
   const data = dataInput.value;
@@ -45,13 +11,14 @@ async function buscarAgenda() {
 
   const { data: agendamentos, error } = await supabase
     .from("agendamentos")
-    .select("barbearia, barbeiro, horario")
+    .select("barbearia, barbeiro, hora")
     .eq("barbearia", barbearia)
     .eq("data", data)
-    .order("horario", { ascending: true });
+    .order("hora", { ascending: true });
 
   if (error) {
     resultados.innerHTML = "<p>Erro ao buscar agendamentos.</p>";
+    console.error(error);
     return;
   }
 
@@ -60,11 +27,12 @@ async function buscarAgenda() {
     return;
   }
 
-  // Agrupa por barbeiro
+  // Agrupa por barbeiro (primeiro nome)
   const agrupado = {};
-  agendamentos.forEach(({ barbeiro, horario }) => {
-    if (!agrupado[barbeiro]) agrupado[barbeiro] = [];
-    agrupado[barbeiro].push(horario);
+  agendamentos.forEach(({ barbeiro, hora }) => {
+    const primeiroNome = barbeiro.split(" ")[0];
+    if (!agrupado[primeiroNome]) agrupado[primeiroNome] = [];
+    agrupado[primeiroNome].push(hora);
   });
 
   resultados.innerHTML = `<h2>Agenda de ${barbearia} - ${formatarData(data)}</h2>`;
@@ -79,8 +47,4 @@ async function buscarAgenda() {
   });
 }
 
-function formatarData(dataStr) {
-  const [ano, mes, dia] = dataStr.split("-");
-  return `${dia}/${mes}/${ano}`;
-}
 
