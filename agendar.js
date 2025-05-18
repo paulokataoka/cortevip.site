@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Função para carregar barbearias do Supabase
   async function carregarBarbearias() {
-    const { data, error } = await supabase
+    const { data, error } = await supabaseClient
       .from("barbearias")
       .select("id, nome");
 
@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       exibirMensagem("Verificando disponibilidade...", "carregando");
 
-      const { data: agendamentosExistentes, error: erroConsulta } = await supabase
+      const { data: agendamentosExistentes, error: erroConsulta } = await supabaseClient
         .from("agendamentos")
         .select("*")
         .eq("data", data)
@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      const { error: erroInsercao } = await supabase
+      const { error: erroInsercao } = await supabaseClient
         .from("agendamentos")
         .insert([
           {
@@ -111,3 +111,4 @@ document.addEventListener("DOMContentLoaded", () => {
     mensagem.className = `mensagem ${tipo}`;
   }
 });
+
