@@ -451,3 +451,25 @@ canvas#fundo-linhas {
     bottom: 15px;
   }
 }
+.agendar-link {
+  margin: 3rem auto 2rem;
+  text-align: center;
+}
+
+.btn-agendar {
+  display: inline-block;
+  padding: 0.8rem 1.8rem;
+  background-color: #32cd32;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-agendar:hover {
+  background-color: #28b428;
+  transform: translateY(-2px);
+}
