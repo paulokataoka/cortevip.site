@@ -1,185 +1,102 @@
-// Supabase config (usa variáveis globais definidas no HTML)
-const supabaseClient = supabase.createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Política de Privacidade - Cortevip.site</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .voltar-btn {
+      margin-top: 40px;
+      padding: 10px 20px;
+      background-color: #32cd32;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
 
-let chatWindowVisible = false;
-let isWelcomeMessageSent = false;
-let cadastroEtapa = 0;
+    .voltar-btn:hover {
+      background-color: #28a428;
+    }
 
-let cadastroBarbearia = { nome: "", endereco: "", telefone: "", servicos: "" };
-let cadastroBarbeiro = { nome: "", telefone: "", especialidade: "" };
-let barbeariaId = null;
+    .voltar-container {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <h1>Política de Privacidade</h1>
 
-function toggleChatWindow() {
-  const chatWindow = document.getElementById('chatWindow');
-  chatWindow.style.display = chatWindowVisible ? 'none' : 'flex';
-  chatWindowVisible = !chatWindowVisible;
+    <p>
+      Esta Política de Privacidade descreve como coletamos, utilizamos e protegemos os dados pessoais dos usuários do Cortevip.site, voltado para agendamento de serviços em barbearias.
+    </p>
 
-  if (!isWelcomeMessageSent) sendWelcomeMessage();
-}
+    <h2>1. Dados coletados</h2>
+    <p>Coletamos os seguintes dados para funcionamento do sistema de agendamento:</p>
+    <ul>
+      <li>Nome do usuário</li>
+      <li>Número de celular</li>
+      <li>Data e hora do agendamento</li>
+      <li>Serviço escolhido</li>
+    </ul>
+    <p>Também coletamos informações dos barbeiros e barbearias cadastradas:</p>
+    <ul>
+      <li>Nome da barbearia</li>
+      <li>Nome do barbeiro</li>
+      <li>Contato do barbeiro e da barbearia</li>
+      <li>Horários de atendimento</li>
+      <li>Endereço da barbearia</li>
+      <li>Serviços oferecidos</li>
+    </ul>
 
-function sendWelcomeMessage() {
-  const chatContent = document.querySelector('.chat-content');
-  chatContent.innerHTML = '';
+    <h2>2. Finalidade da coleta</h2>
+    <p>
+      Os dados são coletados exclusivamente para permitir o agendamento de serviços nas barbearias cadastradas, facilitar o contato entre usuários e barbeiros e organizar os horários disponíveis.
+    </p>
 
-  const welcome = document.createElement('div');
-  welcome.classList.add('message', 'bot-message');
-  welcome.innerHTML = `
-    Olá! Vamos fazer o pré-cadastro da sua barbearia.<br/><br/>
-    Antes de começarmos, você pode ler nossa 
-    <a href="política-de-cookies.html" target="_blank" style="color:#32cd32;text-decoration:underline;">Política de Privacidade</a>.<br/><br/>
-    Você aceita os termos?
-  `;
-  chatContent.appendChild(welcome);
+    <h2>3. Armazenamento e segurança</h2>
+    <p>
+      Os dados são armazenados de forma segura em nossos servidores utilizando a plataforma Supabase. Aplicamos medidas técnicas e organizacionais para garantir a proteção das informações pessoais contra acesso não autorizado, divulgação ou alteração.
+    </p>
 
-  const buttons = document.createElement('div');
-  buttons.classList.add('chat-buttons');
-  buttons.innerHTML = `
-    <button onclick="confirmarLeituraPolitica()">✔️ Li e aceito</button>
-    <button onclick="recusarPolitica()">Agora não</button>
-  `;
-  chatContent.appendChild(buttons);
+    <h2>4. Compartilhamento de dados</h2>
+    <p>
+      Os dados não são compartilhados com terceiros, exceto com os barbeiros e barbearias responsáveis pelo atendimento, exclusivamente para fins de agendamento.
+    </p>
 
-  chatContent.scrollTop = chatContent.scrollHeight;
-  isWelcomeMessageSent = true;
-}
+    <h2>5. Direitos dos titulares</h2>
+    <p>
+      Conforme a Lei Geral de Proteção de Dados (LGPD), os usuários têm o direito de:
+    </p>
+    <ul>
+      <li>Solicitar acesso aos seus dados</li>
+      <li>Corrigir dados incompletos ou incorretos</li>
+      <li>Revogar o consentimento</li>
+      <li>Solicitar a exclusão de seus dados pessoais</li>
+    </ul>
 
-function confirmarLeituraPolitica() {
-  document.querySelector('.chat-buttons')?.remove();
-  cadastroEtapa = 1;
-  fazerPergunta();
-}
+    <h2>6. Exclusão de dados</h2>
+    <p>
+      O usuário pode solicitar a exclusão dos seus dados a qualquer momento entrando em contato com nosso suporte pelo 
+      <strong>WhatsApp: (11) 96523-7500</strong> ou pelo e-mail <strong>[coloque seu e-mail aqui]</strong>.
+    </p>
 
-function recusarPolitica() {
-  document.querySelector('.chat-buttons')?.remove();
-  enviarMensagemBot("Sem problemas! Quando quiser continuar, estarei aqui. 💈");
-}
+    <h2>7. Alterações nesta política</h2>
+    <p>
+      Esta política pode ser atualizada periodicamente. A data da última atualização será sempre informada no final deste documento.
+    </p>
 
-function iniciarCadastro() {
-  document.querySelector('.chat-buttons')?.remove();
-  cadastroEtapa = 1;
-  fazerPergunta();
-}
+    <p><em>Última atualização: 18 de maio de 2025</em></p>
 
-function sendMessage() {
-  const input = document.getElementById('userMessage');
-  const msg = input.value.trim();
-  if (!msg) return;
-
-  const chatContent = document.querySelector('.chat-content');
-  const userMsg = document.createElement('div');
-  userMsg.classList.add('message', 'user-message');
-  userMsg.textContent = msg;
-  chatContent.appendChild(userMsg);
-
-  input.value = '';
-  chatContent.scrollTop = chatContent.scrollHeight;
-
-  processarResposta(msg);
-}
-
-function processarResposta(resposta) {
-  switch (cadastroEtapa) {
-    case 1:
-      cadastroBarbearia.nome = resposta;
-      cadastroEtapa++;
-      fazerPergunta();
-      break;
-    case 2:
-      cadastroBarbearia.endereco = resposta;
-      cadastroEtapa++;
-      fazerPergunta();
-      break;
-    case 3:
-      cadastroBarbearia.telefone = resposta;
-      cadastroEtapa++;
-      fazerPergunta();
-      break;
-    case 4:
-      cadastroBarbearia.servicos = resposta;
-      cadastroEtapa++;
-      salvarCadastroBarbearia();
-      break;
-    case 6:
-      cadastroBarbeiro.nome = resposta;
-      cadastroEtapa++;
-      fazerPergunta();
-      break;
-    case 7:
-      cadastroBarbeiro.telefone = resposta;
-      cadastroEtapa++;
-      fazerPergunta();
-      break;
-    case 8:
-      cadastroBarbeiro.especialidade = resposta;
-      salvarCadastroBarbeiro();
-      break;
-    default:
-      enviarMensagemBot("Se precisar de algo mais, estou por aqui! ✂️");
-  }
-}
-
-function fazerPergunta() {
-  switch (cadastroEtapa) {
-    case 1:
-      enviarMensagemBot("Qual o nome da sua barbearia?");
-      break;
-    case 2:
-      enviarMensagemBot("Qual o endereço completo?");
-      break;
-    case 3:
-      enviarMensagemBot("Qual o telefone para contato?");
-      break;
-    case 4:
-      enviarMensagemBot("Quais serviços sua barbearia oferece?");
-      break;
-    case 6:
-      enviarMensagemBot("Agora vamos cadastrar o primeiro barbeiro. Qual o nome dele?");
-      break;
-    case 7:
-      enviarMensagemBot("Qual o telefone do barbeiro?");
-      break;
-    case 8:
-      enviarMensagemBot("Qual a especialidade dele? (ex: fade, navalhado...)");
-      break;
-  }
-}
-
-function enviarMensagemBot(texto) {
-  const chatContent = document.querySelector('.chat-content');
-  const botMsg = document.createElement('div');
-  botMsg.classList.add('message', 'bot-message');
-  botMsg.textContent = texto;
-  chatContent.appendChild(botMsg);
-  chatContent.scrollTop = chatContent.scrollHeight;
-}
-
-async function salvarCadastroBarbearia() {
-  const { data, error } = await supabaseClient
-    .from('barbearias')
-    .insert([cadastroBarbearia])
-    .select();
-
-  if (error) {
-    console.error("Erro ao salvar barbearia:", error.message);
-    enviarMensagemBot("❌ Ocorreu um erro ao salvar sua barbearia.");
-  } else {
-    barbeariaId = data[0].id;
-    enviarMensagemBot("✅ Barbearia cadastrada com sucesso!");
-    cadastroEtapa = 6;
-    fazerPergunta();
-  }
-}
-
-async function salvarCadastroBarbeiro() {
-  const { error } = await supabaseClient
-    .from('barbeiros')
-    .insert([{ ...cadastroBarbeiro, barbearia_id: barbeariaId }]);
-
-  if (error) {
-    console.error("Erro ao salvar barbeiro:", error.message);
-    enviarMensagemBot("❌ Erro ao salvar o barbeiro.");
-  } else {
-    enviarMensagemBot("✅ Barbeiro cadastrado com sucesso!");
-    enviarMensagemBot("Obrigado pelo cadastro! Em breve entraremos em contato. 💈");
-  }
-}
+    <div class="voltar-container">
+      <a href="index.html">
+        <button class="voltar-btn">Voltar à Página Inicial</button>
+      </a>
+    </div>
+  </main>
+</body>
+</html>
