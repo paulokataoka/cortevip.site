@@ -1,208 +1,452 @@
-/* Fundo preto e cores claras */
-body, html {
+/* RESET BÁSICO */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+html {
   font-family: 'Inter', sans-serif;
-  background-color: #121212; /* fundo preto escuro */
-  color: #eee; /* texto claro */
+  font-size: 16px;
+  background-color: #000;
+  color: #fff;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Container principal */
-.container {
-  max-width: 480px;
-  margin: 0 auto;
-  padding: 2rem 1rem;
-  text-align: center;
-}
-
-/* Logo */
-.logo {
-  font-weight: 700;
-  font-size: 2.5rem;
-  margin-bottom: 0.5rem;
-  color: #32cd32; /* verde vibrante */
-}
-
-.logo span {
-  font-weight: 400;
-  color: #eee;
-}
-
-/* Subtítulo */
-.subtitle {
-  font-size: 1.25rem;
-  margin: 1rem 0 2rem;
-  min-height: 1.5em;
-  color: #bbb;
-}
-
-/* Botões */
-.button-group {
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #000;
+  color: #fff;
   display: flex;
   justify-content: center;
+  align-items: start;
+  min-height: 100vh;
+  padding: 2rem;
+  position: relative;
+}
+
+/* CONTAINER CENTRAL */
+.container {
+  background: #111;
+  padding: 2.5rem;
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(50, 205, 50, 0.3);
+  max-width: 500px;
+  width: 100%;
+  animation: fadeIn 0.6s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 3rem auto;
+}
+
+/* LOGO */
+.logo {
+  font-weight: 700;
+  font-size: 3rem;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.5rem;
+  color: #32cd32;
+  user-select: none;
+}
+.logo span {
+  font-weight: 400;
+  color: #fff;
+}
+
+/* TÍTULO */
+.container h1 {
+  text-align: center;
+  color: #32cd32;
+  margin-bottom: 1.5rem;
+}
+
+/* SUBTÍTULO COM EFEITO DIGITANDO */
+.subtitle {
+  font-weight: 600;
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+  height: 2rem;
+  color: #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+.cursor {
+  font-weight: 700;
+  color: #32cd32;
+  animation: blink 1s steps(2, start) infinite;
+  margin-left: 0.1em;
+}
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  50.1%, 100% { opacity: 0; }
+}
+
+/* FORMULÁRIO */
+form,
+.form-agendamento {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+label,
+.form-group label {
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+  color: #ddd;
+  display: block;
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="date"],
+select,
+textarea,
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 0.6rem 1rem;
+  border: 2px solid #444;
+  border-radius: 0.4rem;
+  background-color: #111;
+  color: #eee;
+  font-size: 1rem;
+  transition: border-color 0.3s, background-color 0.3s;
+  font-family: inherit;
+}
+
+input[type="text"]:focus,
+input[type="tel"]:focus,
+input[type="date"]:focus,
+select:focus,
+textarea:focus,
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #32cd32;
+  background-color: #1a1a1a;
+  outline: none;
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* GRUPO DE BOTÕES */
+.button-group {
+  display: flex;
   gap: 1rem;
-  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+  margin-bottom: 3rem;
 }
 
 .btn {
-  padding: 0.75rem 1.5rem;
-  border-radius: 5px;
-  text-decoration: none;
+  padding: 0.75rem 1.75rem;
+  border-radius: 0.4rem;
   font-weight: 600;
-  transition: background-color 0.3s ease;
-  min-width: 140px;
-  display: inline-block;
+  font-size: 1.1rem;
   text-align: center;
+  cursor: pointer;
   user-select: none;
-  color: #eee;
-  border: 2px solid transparent;
+  transition: background-color 0.25s, color 0.25s, box-shadow 0.25s;
+  text-decoration: none;
+  border: none;
+  min-width: 130px;
+  font-family: inherit;
 }
 
 .btn.primary {
   background-color: #32cd32;
-  border-color: #32cd32;
-  color: #121212;
+  color: #000;
+  box-shadow: 0 4px 8px rgba(50, 205, 50, 0.4);
 }
-
-.btn.primary:hover {
+.btn.primary:hover,
+.btn.primary:focus {
   background-color: #28a428;
-  border-color: #28a428;
-  color: #fff;
+  box-shadow: 0 6px 12px rgba(40, 164, 40, 0.6);
+  outline: none;
 }
 
 .btn.secondary {
   background-color: transparent;
-  border: 2px solid #32cd32;
   color: #32cd32;
+  border: 2px solid #32cd32;
 }
-
-.btn.secondary:hover {
+.btn.secondary:hover,
+.btn.secondary:focus {
   background-color: #32cd32;
-  color: #121212;
+  color: #000;
+  box-shadow: 0 4px 8px rgba(50, 205, 50, 0.4);
+  outline: none;
 }
 
-/* =================== */
-/* ESTILOS DO CHATBOT  */
-/* =================== */
-
-/* Container fixo no canto inferior direito */
-#chatbot {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 320px;
-  max-width: 90vw;
-  font-family: 'Inter', sans-serif;
-  box-shadow: 0 4px 12px rgb(0 0 0 / 0.7);
-  border-radius: 10px;
-  background-color: #1e1e1e; /* fundo escuro do chatbot */
+/* BOTÕES DO FORMULÁRIO */
+.form-actions {
   display: flex;
-  flex-direction: column;
-  user-select: none;
-  z-index: 9999;
-  color: #eee;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1rem;
+  width: 100%;
 }
 
-/* Cabeçalho do chatbot - botão que abre/fecha */
-.chat-header {
+form button,
+.btn-agendar,
+.btn-limpar {
   cursor: pointer;
-  background-color: #32cd32;
-  color: #121212;
-  padding: 0.75rem 1rem;
-  border-radius: 10px 10px 0 0;
+  border: none;
+  border-radius: 0.4rem;
+  padding: 0.75rem 1.5rem;
   font-weight: 700;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
   font-size: 1.1rem;
-  user-select: none;
+  transition: background-color 0.25s;
+  font-family: inherit;
+  flex: 1;
+  min-width: 0;
 }
 
-/* Janela do chat */
-.chat-window {
+.btn-agendar,
+form button[type="submit"] {
+  background-color: #32cd32;
+  color: #000;
+  box-shadow: 0 4px 8px rgba(50, 205, 50, 0.4);
+}
+.btn-agendar:hover,
+form button[type="submit"]:hover,
+.btn-agendar:focus,
+form button[type="submit"]:focus {
+  background-color: #28a428;
+  outline: none;
+}
+
+.btn-limpar,
+form button[type="reset"] {
+  background-color: #444;
+  color: #ccc;
+}
+.btn-limpar:hover,
+form button[type="reset"]:hover,
+.btn-limpar:focus,
+form button[type="reset"]:focus {
+  background-color: #666;
+  outline: none;
+}
+
+/* MENSAGENS */
+.mensagem,
+#mensagem-sucesso {
+  color: #32cd32;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+/* LINKS E RODAPÉ */
+.suporte p,
+.rodape p {
+  text-align: center;
+  font-size: 0.9rem;
+  margin-top: 2rem;
+  color: #ccc;
+}
+
+.suporte a,
+.rodape a,
+.voltar {
+  color: #32cd32;
+  text-decoration: none;
+  user-select: none;
+  font-weight: 600;
+}
+
+.suporte a:hover,
+.rodape a:hover,
+.voltar:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* VOLTAR LINK */
+.voltar {
+  display: inline-block;
+  margin-top: 1.5rem;
+}
+
+/* FUNDO COM CANVAS (opcional para agendar.html) */
+#fundo-linhas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  z-index: -1;
+}
+
+/* CANVAS */
+canvas#fundo-linhas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+/* ANIMAÇÃO DE APARECER */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  } 
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* CHATBOT */
+.chatbot {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  width: 320px;
+  font-family: 'Inter', sans-serif;
+  background: #fff;
+  color: #222;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  z-index: 1000;
   display: flex;
   flex-direction: column;
-  height: 350px;
-  background-color: #121212;
-  border-top: 1px solid #32cd32;
-  border-radius: 0 0 10px 10px;
-  overflow: hidden;
-  color: #eee;
+  transition: box-shadow 0.3s ease;
 }
-
-/* Área de mensagens */
-.chat-content {
-  flex: 1;
+.chatbot:hover,
+.chatbot:focus-within {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+.chat-header {
+  background-color: #32cd32;
+  color: #fff;
   padding: 1rem;
+  font-weight: 700;
+  font-size: 1.2rem;
+  user-select: none;
+}
+.chat-messages {
+  padding: 1rem;
+  flex: 1;
   overflow-y: auto;
-  font-size: 0.9rem;
-  color: #ddd;
-}
-
-/* Input e botão enviar */
-.chat-input {
   display: flex;
-  padding: 0.5rem 1rem;
-  border-top: 1px solid #32cd32;
-  background-color: #1e1e1e;
+  flex-direction: column;
+  gap: 0.5rem;
+  background: #e5f3e8;
 }
-
+.chat-input {
+  border-top: 1px solid #ccc;
+  padding: 0.75rem 1rem;
+  display: flex;
+  gap: 0.75rem;
+  background: #f9fff9;
+}
 .chat-input input[type="text"] {
   flex: 1;
-  padding: 0.5rem 0.75rem;
-  border: 1px solid #32cd32;
-  border-radius: 5px 0 0 5px;
+  padding: 0.5rem 1rem;
   font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 20px;
   outline: none;
-  background-color: #121212;
-  color: #eee;
-  transition: border-color 0.2s ease;
+  font-family: inherit;
 }
-
-.chat-input input[type="text"]::placeholder {
-  color: #777;
-}
-
-.chat-input input[type="text"]:focus {
-  border-color: #28a428;
-}
-
 .chat-input button {
-  padding: 0 1.2rem;
   background-color: #32cd32;
-  color: #121212;
   border: none;
-  border-radius: 0 5px 5px 0;
+  color: #000;
   font-weight: 700;
+  border-radius: 20px;
+  padding: 0 1rem;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  user-select: none;
+  transition: background-color 0.25s ease;
 }
-
-.chat-input button:hover {
+.chat-input button:hover,
+.chat-input button:focus {
   background-color: #28a428;
+  outline: none;
+}
+/* Mensagens do BOT */
+.bot-message {
+  background-color: #2e7d32;
+  color: white;
+  align-self: flex-start;
+  padding: 10px 15px;
+  margin: 6px 0;
+  border-radius: 18px 18px 18px 0;
+  max-width: 75%;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  font-size: 0.95rem;
+  line-height: 1.4;
 }
 
-/* Scrollbar customizado para chat-content */
-.chat-content::-webkit-scrollbar {
-  width: 6px;
+/* Mensagens do USUÁRIO */
+.user-message {
+  background-color: #d0f0c0;
+  color: #222;
+  align-self: flex-end;
+  padding: 10px 15px;
+  margin: 6px 0;
+  border-radius: 18px 18px 0 18px;
+  max-width: 75%;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  font-size: 0.95rem;
+  line-height: 1.4;
 }
 
-.chat-content::-webkit-scrollbar-thumb {
-  background-color: #32cd32;
-  border-radius: 3px;
-}
-
-.chat-content::-webkit-scrollbar-track {
-  background-color: #1e1e1e;
-}
-
-/* Responsividade para telas menores */
-@media (max-width: 400px) {
-  #chatbot {
-    width: 90vw;
-    bottom: 10px;
-    right: 5vw;
+/* RESPONSIVIDADE */
+@media (max-width: 600px) {
+  body {
+    padding: 1rem;
+  }
+  .container {
+    max-width: 100%;
+    padding: 2rem 1.5rem;
+    margin: 2rem 0;
+  }
+  .logo {
+    font-size: 2.5rem;
+  }
+  .chatbot {
+    width: 95vw;
+    right: 2.5vw;
+    bottom: 15px;
+  }
+  .button-group {
+    flex-direction: column;
+  }
+  .btn {
+    min-width: 100%;
+  }
+  .form-actions {
+    flex-direction: column;
+  }
+  form button,
+  .btn-agendar,
+  .btn-limpar {
+    width: 100%;
+    flex: none;
   }
 }
 
