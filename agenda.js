@@ -1,7 +1,8 @@
 // Elementos DOM
-const barbeariaSelect = document.getElementById("barbeariaSelect");
-const dataInput = document.getElementById("dataInput");
+const barbeariaSelect = document.getElementById("barbearia");
+const dataInput = document.getElementById("data");
 const resultados = document.getElementById("resultados");
+const consultarBtn = document.getElementById("consultar");
 
 // Função para formatar a data no formato amigável (exemplo: 18/05/2025)
 function formatarData(dataISO) {
@@ -25,16 +26,19 @@ async function carregarBarbearias() {
   barbeariaSelect.innerHTML = `<option value="">Selecione uma barbearia</option>`;
   barbearias.forEach(({ id, nome }) => {
     const option = document.createElement("option");
-    option.value = id;  // id é o UUID da barbearia
+    option.value = id; // id é o UUID da barbearia
     option.textContent = nome;
     barbeariaSelect.appendChild(option);
   });
+
+  barbeariaSelect.disabled = false;
+  consultarBtn.disabled = false;
 }
 
 // Busca os agendamentos da barbearia e data selecionados
 async function buscarAgenda() {
-  const barbearia = barbeariaSelect.value;  // deve conter o UUID
-  const data = dataInput.value;  // formato 'YYYY-MM-DD'
+  const barbearia = barbeariaSelect.value; // UUID
+  const data = dataInput.value; // formato YYYY-MM-DD
 
   if (!barbearia || !data) {
     resultados.innerHTML = "<p>Selecione uma barbearia e uma data.</p>";
@@ -43,7 +47,6 @@ async function buscarAgenda() {
 
   resultados.innerHTML = "<p>Carregando agenda...</p>";
 
-  // Busca agendamentos com foreign key e nome da barbearia pelo relacionamento
   const { data: agendamentos, error } = await supabase
     .from("agendamentos")
     .select(`
@@ -66,10 +69,8 @@ async function buscarAgenda() {
     return;
   }
 
-  // Extrai nome da barbearia do primeiro item (mesmo para todos, pois filtro)
   const nomeBarbearia = agendamentos[0].barbearia_id.nome;
 
-  // Agrupa horários por barbeiro (pega primeiro nome)
   const agrupado = {};
   agendamentos.forEach(({ barbeiro, hora }) => {
     const primeiroNome = barbeiro.split(" ")[0];
@@ -89,10 +90,8 @@ async function buscarAgenda() {
   });
 }
 
-// Inicialização - carrega barbearias ao carregar a página
+// Inicialização
 document.addEventListener("DOMContentLoaded", () => {
   carregarBarbearias();
+  consultarBtn.addEventListener("click", buscarAgenda);
 });
-
-
-
