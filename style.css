@@ -473,3 +473,101 @@ canvas#fundo-linhas {
   background-color: #28b428;
   transform: translateY(-2px);
 }
+
+/* RESPONSIVIDADE GERAL */
+@media (max-width: 768px) {
+  .container {
+    padding: 1.5rem;
+    margin: 2rem 1rem;
+    max-width: 100%;
+  }
+
+  .logo {
+    font-size: 2.2rem;
+    text-align: center;
+  }
+
+  .container h1 {
+    font-size: 1.5rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .btn {
+    font-size: 1rem;
+    padding: 0.6rem 1.25rem;
+  }
+
+  .chatbot {
+    width: 90vw;
+    right: 5vw;
+    bottom: 15px;
+  }
+
+  .chat-window {
+    height: 320px;
+  }
+
+  .chat-header {
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
+  }
+
+  .chat-input input[type="text"] {
+    font-size: 0.9rem;
+  }
+
+  .chat-input button {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 1rem;
+  }
+
+  .container {
+    padding: 1rem;
+    margin: 1rem 0.5rem;
+  }
+
+  .button-group,
+  .form-actions {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .btn,
+  form button,
+  .btn-agendar,
+  .btn-limpar {
+    width: 100%;
+  }
+}
+.container {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  max-width: 600px; /* limite largura para telas grandes */
+  margin: 0 auto; /* centraliza horizontalmente */
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column; /* deixa os botões empilhados no celular */
+  gap: 1rem; /* espaço entre os botões */
+  margin-top: 2rem;
+}
+
+@media (min-width: 600px) {
+  .button-group {
+    flex-direction: row; /* lado a lado em telas maiores */
+    justify-content: center;
+  }
+  .button-group a {
+    min-width: 150px; /* largura mínima para botões */
+  }
+}
