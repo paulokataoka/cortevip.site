@@ -23,16 +23,35 @@ function sendWelcomeMessage() {
 
   const welcome = document.createElement('div');
   welcome.classList.add('message', 'bot-message');
-  welcome.textContent = "Olá! Vamos fazer o pré-cadastro da sua barbearia. Posso te perguntar algumas coisas?";
+  welcome.innerHTML = `
+    Olá! Vamos fazer o pré-cadastro da sua barbearia.<br/><br/>
+    Antes de começarmos, você pode ler nossa 
+    <a href="política-de-cookies.html" target="_blank" style="color:#32cd32;text-decoration:underline;">Política de Privacidade</a>.<br/><br/>
+    Você aceita os termos?
+  `;
   chatContent.appendChild(welcome);
 
   const buttons = document.createElement('div');
   buttons.classList.add('chat-buttons');
-  buttons.innerHTML = `<button onclick="iniciarCadastro()">Sim, claro!</button>`;
+  buttons.innerHTML = `
+    <button onclick="confirmarLeituraPolitica()">✔️ Li e aceito</button>
+    <button onclick="recusarPolitica()">Agora não</button>
+  `;
   chatContent.appendChild(buttons);
 
   chatContent.scrollTop = chatContent.scrollHeight;
   isWelcomeMessageSent = true;
+}
+
+function confirmarLeituraPolitica() {
+  document.querySelector('.chat-buttons')?.remove();
+  cadastroEtapa = 1;
+  fazerPergunta();
+}
+
+function recusarPolitica() {
+  document.querySelector('.chat-buttons')?.remove();
+  enviarMensagemBot("Sem problemas! Quando quiser continuar, estarei aqui. 💈");
 }
 
 function iniciarCadastro() {
