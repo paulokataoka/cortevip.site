@@ -3,11 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cortevip.site | Bem-vindo</title>
+  <title>Cortevip.site | Agendamento de Barbearias</title>
 
+  <!-- Meta SEO -->
+  <meta name="description" content="Agende, reagende ou cancele horários em barbearias com facilidade usando o Cortevip.site. Atendimento rápido, organizado e moderno." />
+  <meta name="google-site-verification" content="1DWE5e6RCAoakzT-TcnkxmcUHfToozFK582D0O6M9DE" />
+
+  <!-- Preconnect para fontes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
   <!-- Fonte Inter -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
-  <meta name="google-site-verification" content="1DWE5e6RCAoakzT-TcnkxmcUHfToozFK582D0O6M9DE" />
+
+  <!-- Ícones -->
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="icon.png" />
+
   <!-- Estilo principal -->
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -17,36 +29,37 @@
     <h2><span id="typed-text"></span></h2>
 
     <div class="button-group">
-      <a href="agendar.html" class="btn primary">Agendar</a>
-      <a href="reagendar.html" class="btn secondary">Reagendar / Cancelar</a>
-      <a href="agenda.html" class="btn secondary">Verificar Ocupação</a>
+      <a href="agendar.html" class="btn primary" aria-label="Agendar horário">Agendar</a>
+      <a href="reagendar.html" class="btn secondary" aria-label="Reagendar ou cancelar horário">Reagendar / Cancelar</a>
+      <a href="agenda.html" class="btn secondary" aria-label="Verificar agenda disponível">Verificar Ocupação</a>
     </div>
   </main>
 
   <!-- Chatbot -->
   <div id="chatbot" class="chatbot">
-    <div class="chat-header" onclick="toggleChatWindow()">
+    <div class="chat-header" onclick="toggleChatWindow()" role="button" aria-label="Abrir ou fechar o chatbot">
       <span>💬</span> <span>BarberBot</span>
     </div>
     <div class="chat-window" id="chatWindow" style="display:none;">
-      <div class="chat-content"></div>
+      <div class="chat-content" aria-live="polite"></div>
       <div class="chat-input">
-        <input type="text" id="userMessage" placeholder="Digite sua mensagem..." />
-        <button onclick="sendMessage()">Enviar</button>
+        <input type="text" id="userMessage" placeholder="Digite sua mensagem..." aria-label="Campo para digitar mensagem" />
+        <button onclick="sendMessage()" aria-label="Enviar mensagem">Enviar</button>
       </div>
     </div>
   </div>
 
-  <!-- Supabase SDK primeiro -->
+  <!-- Supabase SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-  <!-- Depois definimos as variáveis globais -->
+  <!-- Variáveis globais do Supabase -->
   <script>
     window.SUPABASE_URL = 'https://smfeazihfcqmtmmnhknm.supabase.co';
-    window.SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNtZmVhemloZmNxbXRtbW5oa25tIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDYzNzMzOTcsImV4cCI6MjA2MTk0OTM5N30.iiFgvwJ89Jnm6Z5HDJm24LJrwhK_3tc_arHzDMOZvwc'; // Substitua pela sua chave completa
+    window.SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNtZmVhemloZmNxbXRtbW5oa25tIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDYzNzMzOTcsImV4cCI6MjA2MTk0OTM5N30.iiFgvwJ89Jnm6Z5HDJm24LJrwhK_3tc_arHzDMOZvwc';
   </script>
 
   <!-- Script do Chatbot -->
   <script src="chatbot.js"></script>
 </body>
 </html>
+
