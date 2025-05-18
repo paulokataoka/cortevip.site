@@ -50,8 +50,10 @@ async function buscarAgenda() {
   const { data: agendamentos, error } = await supabase
     .from("agendamentos")
     .select(`
-      barbeiro,
       hora,
+      barbeiro_id (
+        nome
+      ),
       barbearia_id (nome)
     `)
     .eq("barbearia_id", barbearia)
@@ -71,9 +73,11 @@ async function buscarAgenda() {
 
   const nomeBarbearia = agendamentos[0].barbearia_id.nome;
 
+  // Agrupar horários por barbeiro (usando o nome do barbeiro)
   const agrupado = {};
-  agendamentos.forEach(({ barbeiro, hora }) => {
-    const primeiroNome = barbeiro.split(" ")[0];
+  agendamentos.forEach(({ barbeiro_id, hora }) => {
+    const nomeBarbeiro = barbeiro_id.nome;
+    const primeiroNome = nomeBarbeiro.split(" ")[0];
     if (!agrupado[primeiroNome]) agrupado[primeiroNome] = [];
     agrupado[primeiroNome].push(hora);
   });
