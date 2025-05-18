@@ -20,7 +20,6 @@
       <a href="agendar.html" class="btn primary">Agendar</a>
       <a href="reagendar.html" class="btn secondary">Reagendar / Cancelar</a>
       <a href="agenda.html" class="btn secondary">Verificar Ocupação</a>
-
     </div>
   </main>
 
@@ -38,12 +37,16 @@
     </div>
   </div>
 
-  <!-- Biblioteca Supabase -->
+  <!-- Supabase SDK primeiro -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-  <!-- Script do chatbot -->
+  <!-- Depois definimos as variáveis globais -->
+  <script>
+    window.SUPABASE_URL = 'https://smfeazihfcqmtmmnhknm.supabase.co';
+    window.SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNtZmVhemloZmNxbXRtbW5oa25tIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDYzNzMzOTcsImV4cCI6MjA2MTk0OTM5N30.iiFgvwJ89Jnm6Z5HDJm24LJrwhK_3tc_arHzDMOZvwc'; // Substitua pela sua chave completa
+  </script>
+
+  <!-- Script do Chatbot -->
   <script src="chatbot.js"></script>
 </body>
 </html>
-
-
