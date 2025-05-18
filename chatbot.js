@@ -1,148 +1,147 @@
 // Inicialização do Supabase
 const supabaseUrl = 'https://smfeazihfcqmtmmnhknm.supabase.co';
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNtZmVhemloZmNxbXRtbW5oa25tIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDYzNzMzOTcsImV4cCI6MjA2MTk0OTM5N30.iiFgvwJ89Jnm6Z5HDJm24LJrwhK_3tc_arHzDMOZvwc';
-const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
+// Controle do chatbot
 let chatWindowVisible = false;
 let isWelcomeMessageSent = false;
-let cadastroEtapa = 0;
-let cadastroBarbearia = { nome: "", endereco: "", telefone: "", servicos: "" };
+let etapa = 0;
 
+const cadastro = {
+  barbearia: {
+    nome: '',
+    endereco: '',
+    telefone: '',
+    servicos: ''
+  },
+  barbeiro: {
+    nome: '',
+    especialidade: '',
+    telefone: ''
+  }
+};
+
+// Exibir/esconder chat
 function toggleChatWindow() {
   const chatWindow = document.getElementById('chatWindow');
-  if (chatWindowVisible) {
-    chatWindow.style.display = 'none';
-  } else {
-    chatWindow.style.display = 'flex';
-    if (!isWelcomeMessageSent) {
-      sendWelcomeMessage();
-    }
-  }
+  chatWindow.style.display = chatWindowVisible ? 'none' : 'flex';
   chatWindowVisible = !chatWindowVisible;
+  if (!isWelcomeMessageSent) {
+    sendWelcomeMessage();
+  }
 }
 
+// Mensagem de boas-vindas
 function sendWelcomeMessage() {
-  const chatContent = document.querySelector('.chat-content');
-  chatContent.innerHTML = '';
-
-  const botWelcome = document.createElement('div');
-  botWelcome.classList.add('message', 'bot-message');
-  botWelcome.textContent = "Olá! Tudo bem? Vamos fazer o Pré-cadastro da sua barbearia. Posso te perguntar algumas coisas rapidinho?";
-  chatContent.appendChild(botWelcome);
-
-  const botButtons = document.createElement('div');
-  botButtons.classList.add('chat-buttons');
-  botButtons.innerHTML = `<button onclick="iniciarCadastro()">Sim, claro!</button>`;
-  chatContent.appendChild(botButtons);
-
-  chatContent.scrollTop = chatContent.scrollHeight;
+  const chat = document.querySelector('.chat-content');
+  chat.innerHTML = '';
+  appendBotMessage("Olá! Vamos fazer o pré-cadastro da sua barbearia. Posso perguntar algumas coisas rapidinho?");
+  appendButtons([{ text: "Sim, claro!", onClick: iniciarCadastro }]);
   isWelcomeMessageSent = true;
+}
+
+function appendButtons(buttons) {
+  const chat = document.querySelector('.chat-content');
+  const buttonDiv = document.createElement('div');
+  buttonDiv.classList.add('chat-buttons');
+  buttonDiv.innerHTML = buttons.map(btn => `<button onclick="${btn.onClick.name}()">${btn.text}</button>`).join('');
+  chat.appendChild(buttonDiv);
+  chat.scrollTop = chat.scrollHeight;
 }
 
 function iniciarCadastro() {
   document.querySelector('.chat-buttons')?.remove();
-  cadastroEtapa = 1;
-  fazerPergunta();
+  etapa = 1;
+  perguntar();
 }
 
 function sendMessage() {
-  const userInput = document.getElementById('userMessage');
-  const userMessage = userInput.value.trim();
-
-  if (!userMessage) return;
-
-  const chatContent = document.querySelector('.chat-content');
-
-  const userMessageElement = document.createElement('div');
-  userMessageElement.classList.add('message', 'user-message');
-  userMessageElement.textContent = userMessage;
-  chatContent.appendChild(userMessageElement);
-
-  userInput.value = '';
-  chatContent.scrollTop = chatContent.scrollHeight;
-
-  processarResposta(userMessage);
+  const input = document.getElementById('userMessage');
+  const msg = input.value.trim();
+  if (!msg) return;
+  appendUserMessage(msg);
+  input.value = '';
+  processarResposta(msg);
 }
 
+function appendUserMessage(text) {
+  const chat = document.querySelector('.chat-content');
+  const msg = document.createElement('div');
+  msg.className = 'message user-message';
+  msg.textContent = text;
+  chat.appendChild(msg);
+  chat.scrollTop = chat.scrollHeight;
+}
+
+function appendBotMessage(text) {
+  const chat = document.querySelector('.chat-content');
+  const msg = document.createElement('div');
+  msg.className = 'message bot-message';
+  msg.textContent = text;
+  chat.appendChild(msg);
+  chat.scrollTop = chat.scrollHeight;
+}
+
+// Fluxo de perguntas
+function perguntar() {
+  switch (etapa) {
+    case 1: appendBotMessage("Primeiro, qual o nome da sua barbearia?"); break;
+    case 2: appendBotMessage("Legal! Qual o endereço completo da barbearia?"); break;
+    case 3: appendBotMessage("Show! Agora me diga o telefone de contato da barbearia."); break;
+    case 4: appendBotMessage("E quais serviços vocês oferecem?"); break;
+    case 5: appendBotMessage("Agora vamos cadastrar o barbeiro. Qual o nome dele?"); break;
+    case 6: appendBotMessage("Qual a especialidade do barbeiro?"); break;
+    case 7: appendBotMessage("E o telefone do barbeiro?"); break;
+    case 8: appendBotMessage("Cadastro completo! Salvando no sistema... ✂️"); salvarTudo(); break;
+    default: appendBotMessage("Se precisar de algo mais, estou por aqui!"); break;
+  }
+}
+
+// Processa cada resposta do usuário
 function processarResposta(resposta) {
-  switch (cadastroEtapa) {
-    case 1:
-      cadastroBarbearia.nome = resposta;
-      cadastroEtapa++;
-      fazerPergunta();
-      break;
-    case 2:
-      cadastroBarbearia.endereco = resposta;
-      cadastroEtapa++;
-      fazerPergunta();
-      break;
-    case 3:
-      cadastroBarbearia.telefone = resposta;
-      cadastroEtapa++;
-      fazerPergunta();
-      break;
-    case 4:
-      cadastroBarbearia.servicos = resposta;
-      cadastroEtapa++;
-      fazerPergunta();
-      break;
-    default:
-      enviarMensagemBot("Se precisar de algo mais, estou por aqui!");
-      break;
+  switch (etapa) {
+    case 1: cadastro.barbearia.nome = resposta; break;
+    case 2: cadastro.barbearia.endereco = resposta; break;
+    case 3: cadastro.barbearia.telefone = resposta; break;
+    case 4: cadastro.barbearia.servicos = resposta; break;
+    case 5: cadastro.barbeiro.nome = resposta; break;
+    case 6: cadastro.barbeiro.especialidade = resposta; break;
+    case 7: cadastro.barbeiro.telefone = resposta; break;
   }
+  etapa++;
+  perguntar();
 }
 
-function fazerPergunta() {
-  switch (cadastroEtapa) {
-    case 1:
-      enviarMensagemBot("Primeiro, qual o nome da sua barbearia?");
-      break;
-    case 2:
-      enviarMensagemBot("Show! Agora me diga o endereço completo.");
-      break;
-    case 3:
-      enviarMensagemBot("Beleza. Qual o telefone para contato?");
-      break;
-    case 4:
-      enviarMensagemBot("E por último, quais serviços sua barbearia oferece?");
-      break;
-    case 5:
-      enviarMensagemBot("Cadastro finalizado! Obrigado.Nosso time entrará em contato! 🎉");
-      enviarMensagemBot(`Resumo:\n• Nome: ${cadastroBarbearia.nome}\n• Endereço: ${cadastroBarbearia.endereco}\n• Telefone: ${cadastroBarbearia.telefone}\n• Serviços: ${cadastroBarbearia.servicos}`);
-      salvarCadastro();
-      break;
-  }
-}
+// Salvar nos bancos do Supabase
+async function salvarTudo() {
+  try {
+    // 1. Salvar barbearia
+    const { data: barbearia, error: err1 } = await supabase.from('barbearias').insert([cadastro.barbearia]).select().single();
+    if (err1) throw err1;
 
-function enviarMensagemBot(mensagem) {
-  const chatContent = document.querySelector('.chat-content');
-  const botMessage = document.createElement('div');
-  botMessage.classList.add('message', 'bot-message');
-  botMessage.textContent = mensagem;
-  chatContent.appendChild(botMessage);
-  chatContent.scrollTop = chatContent.scrollHeight;
-}
+    // 2. Salvar barbeiro
+    const { data: barbeiro, error: err2 } = await supabase.from('barbeiros').insert([cadastro.barbeiro]).select().single();
+    if (err2) throw err2;
 
-async function salvarCadastro() {
-  const { data, error } = await supabaseClient
-    .from('barbearias')
-    .insert([
-      {
-        nome: cadastroBarbearia.nome,
-        endereco: cadastroBarbearia.endereco,
-        telefone: cadastroBarbearia.telefone,
-        servicos: cadastroBarbearia.servicos,
-      },
+    // 3. Relacionar
+    const { error: err3 } = await supabase.from('barbearia_barbeiro').insert([
+      { barbearia_id: barbearia.id, barbeiro_id: barbeiro.id }
     ]);
+    if (err3) throw err3;
 
-  if (error) {
-    console.error("Erro ao salvar:", error.message);
-    enviarMensagemBot("❌ Ocorreu um erro ao salvar seu cadastro. Tente novamente.");
-  } else {
-    enviarMensagemBot("✅ Cadastro salvo com sucesso no nosso sistema! ✂️");
+    appendBotMessage("✅ Tudo certo! Cadastro salvo com sucesso. Obrigado!");
+    appendBotMessage(`Resumo:\n• Barbearia: ${cadastro.barbearia.nome}\n• Barbeiro: ${cadastro.barbeiro.nome}`);
+  } catch (err) {
+    console.error("Erro no cadastro:", err);
+    appendBotMessage("❌ Algo deu errado ao salvar os dados. Tente novamente.");
   }
 }
 
+// Escuta Enter no campo de texto
 document.addEventListener("DOMContentLoaded", () => {
-  // Espera o usuário abrir o chat
+  document.getElementById("userMessage").addEventListener("keypress", function (e) {
+    if (e.key === "Enter") sendMessage();
+  });
 });
+
