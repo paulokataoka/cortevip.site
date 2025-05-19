@@ -10,7 +10,7 @@ Este projeto é público apenas para fins educacionais ou colaboração.
 
 
 ---
-Paulo Cesar Kataoka.
+Paulo Cesar Kataoka, 19 de maio de 2025, Estado de São Paulo.
   
 [GitHub](https://github.com/paulokataoka)
 
