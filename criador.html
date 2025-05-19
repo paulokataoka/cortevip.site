@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fundadores | CorteVip.site</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #111;
+      color: #fff;
+      margin: 0;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    h1 {
+      margin-bottom: 2rem;
+      font-size: 2rem;
+      color: #32cd32;
+    }
+    .team {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      max-width: 800px;
+      width: 100%;
+    }
+    .member {
+      background: #1b1b1b;
+      padding: 1.5rem;
+      border-radius: 12px;
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .member img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #32cd32;
+    }
+    .info {
+      flex: 1;
+    }
+    .info h2 {
+      margin: 0 0 0.5rem;
+      font-size: 1.5rem;
+      color: #32cd32;
+    }
+    .info p {
+      margin: 0;
+      line-height: 1.5;
+      color: #ccc;
+    }
+    .back-button {
+      margin-top: 3rem;
+      padding: 0.75rem 1.5rem;
+      background-color: #32cd32;
+      color: #111;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+    .back-button:hover {
+      background-color: #28b428;
+    }
+    @media (max-width: 600px) {
+      .member {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .info h2 {
+        font-size: 1.25rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Quem Somos</h1>
+
+  <div class="team">
+    <div class="member">
+      <img src="fundador1.jpg" alt="Sua Foto" />
+      <div class="info">
+        <h2>Paulo C. Kataoka</h2>
+        <p>Especialista em Gestão Comercial, fundador e idealizador do <strong>CorteVip.site</strong>. Atua na criação de soluções digitais que conectam empresas e consumidores de forma estratégica e eficiente.</p>
+      </div>
+    </div>
+
+    <div class="member">
+      <img src="img/fundador2.jpg" alt="Foto do Cofundador" />
+      <div class="info">
+        <h2>Ana J. Kataoka</h2>
+        <p>Cofundadora do CorteVip.site, lidera as estratégias de marketing digital e inovação da plataforma, com foco em performance e experiência do usuário.</p>
+      </div>
+    </div>
+  </div>
+
+  <a href="index.html" class="back-button">← Voltar para a página inicial</a>
+</body>
+</html>
+
