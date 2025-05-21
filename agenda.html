@@ -2,9 +2,254 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Agenda da Barbearia - CorteVip</title>
-  <link rel="stylesheet" href="style.css" />
+
+  <!-- CSS embutido para visual profissional -->
+  <style>
+    /* Reset básico */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: #f7f9fc;
+      color: #222;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 20px;
+    }
+
+    main.container {
+      background: white;
+      max-width: 720px;
+      width: 100%;
+      border-radius: 12px;
+      padding: 30px 40px;
+      box-shadow:
+        0 4px 6px rgb(0 0 0 / 0.1),
+        0 1px 3px rgb(0 0 0 / 0.06);
+    }
+
+    h1 {
+      font-weight: 700;
+      font-size: 2.2rem;
+      margin-bottom: 25px;
+      color: #1a1a1a;
+      text-align: center;
+      letter-spacing: 1px;
+      user-select: none;
+    }
+
+    section.filtros {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px 25px;
+      justify-content: center;
+      margin-bottom: 30px;
+      align-items: flex-end;
+    }
+
+    section.filtros label {
+      font-weight: 600;
+      color: #555;
+      user-select: none;
+      min-width: 110px;
+      font-size: 1rem;
+    }
+
+    select#barbearia,
+    input#data {
+      padding: 10px 15px;
+      border: 1.8px solid #bbb;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border-color 0.25s ease;
+      min-width: 220px;
+      cursor: pointer;
+    }
+
+    select#barbearia:disabled,
+    button:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    select#barbearia:hover:not(:disabled),
+    input#data:hover,
+    select#barbearia:focus,
+    input#data:focus {
+      border-color: #32cd32;
+      outline: none;
+      box-shadow: 0 0 8px #32cd32aa;
+    }
+
+    button#consultar {
+      background: #32cd32;
+      border: none;
+      color: white;
+      font-weight: 700;
+      font-size: 1.1rem;
+      padding: 12px 28px;
+      border-radius: 25px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px #32cd32bb;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
+      min-width: 140px;
+    }
+
+    button#consultar:hover:not(:disabled) {
+      background: #28a828;
+      box-shadow: 0 6px 16px #28a828cc;
+    }
+
+    .agendar-link {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+
+    a.btn-agendar {
+      display: inline-block;
+      background: #1e90ff;
+      color: white;
+      font-weight: 700;
+      font-size: 1.2rem;
+      padding: 14px 32px;
+      border-radius: 30px;
+      text-decoration: none;
+      box-shadow: 0 5px 15px #1e90ffaa;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
+    }
+
+    a.btn-agendar:hover {
+      background: #187bcd;
+      box-shadow: 0 7px 20px #187bcdcc;
+    }
+
+    section#resultados {
+      background: #fafafa;
+      border-radius: 12px;
+      padding: 20px 25px;
+      box-shadow:
+        inset 0 1px 2px rgb(0 0 0 / 0.05);
+      min-height: 120px;
+      font-size: 1rem;
+      color: #444;
+      user-select: none;
+    }
+
+    section#resultados h2 {
+      margin-bottom: 20px;
+      font-weight: 700;
+      color: #222;
+      font-size: 1.5rem;
+      text-align: center;
+      letter-spacing: 0.05em;
+    }
+
+    .agenda-item {
+      margin-bottom: 22px;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 15px;
+    }
+
+    .agenda-item:last-child {
+      border-bottom: none;
+    }
+
+    .agenda-item h3 {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #333;
+      margin-bottom: 8px;
+    }
+
+    .ocupados-label {
+      font-weight: 600;
+      color: #c0392b;
+      margin-bottom: 10px;
+      font-size: 1rem;
+    }
+
+    ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 12px;
+    }
+
+    ul li.ocupado {
+      background: #e74c3c;
+      color: white;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 1rem;
+      position: relative;
+      cursor: default;
+      box-shadow: 0 3px 8px rgba(231, 76, 60, 0.6);
+      user-select: none;
+      display: flex;
+      align-items: center;
+    }
+
+    ul li.ocupado::before {
+      content: "⛔";
+      margin-right: 6px;
+      font-size: 1.1rem;
+      line-height: 1;
+    }
+
+    ul li.ocupado:hover::after {
+      content: "Horário ocupado";
+      position: absolute;
+      bottom: 125%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #c0392b;
+      color: white;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      white-space: nowrap;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+      opacity: 1;
+      pointer-events: auto;
+      z-index: 10;
+    }
+
+    ul li.ocupado::after {
+      content: "";
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+
+    /* Responsividade simples */
+    @media (max-width: 520px) {
+      section.filtros {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      select#barbearia,
+      input#data,
+      button#consultar {
+        min-width: 100%;
+      }
+
+      ul {
+        justify-content: center;
+      }
+    }
+  </style>
 </head>
 <body>
   <main class="container">
@@ -41,8 +286,127 @@
     window.supabase = supabase.createClient(supabaseUrl, supabaseKey);
   </script>
 
-  <!-- Seu código JS que usa supabase -->
-  <script src="agenda.js"></script>
+  <!-- Código JS para carregar barbearias e buscar agenda -->
+  <script>
+    const barbeariaSelect = document.getElementById("barbearia");
+    const dataInput = document.getElementById("data");
+    const resultados = document.getElementById("resultados");
+    const consultarBtn = document.getElementById("consultar");
+
+    // Formata data ISO para dd/mm/yyyy
+    function formatarData(dataISO) {
+      const dt = new Date(dataISO);
+      return dt.toLocaleDateString("pt-BR");
+    }
+
+    // Carrega barbearias no select
+    async function carregarBarbearias() {
+      const { data: barbearias, error } = await supabase
+        .from("barbearias")
+        .select("id, nome")
+        .order("nome", { ascending: true });
+
+      if (error) {
+        console.error("Erro ao carregar barbearias:", error);
+        resultados.innerHTML = "<p>Erro ao carregar barbearias.</p>";
+        return;
+      }
+
+      barbeariaSelect.innerHTML = `<option value="">Selecione uma barbearia</option>`;
+      barbearias.forEach(({ id, nome }) => {
+        const option = document.createElement("option");
+        option.value = id;
+        option.textContent = nome;
+        barbeariaSelect.appendChild(option);
+      });
+
+      barbeariaSelect.disabled = false;
+      consultarBtn.disabled = false;
+    }
+
+    // Busca agendamentos para barbearia e data
+    async function buscarAgenda() {
+      const barbearia = barbeariaSelect.value;
+      const data = dataInput.value;
+
+      if (!barbearia || !data) {
+        resultados.innerHTML = "<p>Selecione uma barbearia e uma data.</p>";
+        return;
+      }
+
+      resultados.innerHTML = "<p>Carregando agenda...</p>";
+
+      const { data: agendamentos, error } = await supabase
+        .from("agendamentos")
+        .select(`
+          hora,
+          barbeiro_id (
+            nome
+          ),
+          barbearia_id (nome)
+        `)
+        .eq("barbearia_id", barbearia)
+        .eq("data", data)
+        .order("hora", { ascending: true });
+
+      if (error) {
+        resultados.innerHTML = "<p>Erro ao buscar agendamentos.</p>";
+        console.error("Erro ao buscar agenda:", error);
+        return;
+      }
+
+      if (!agendamentos || agendamentos.length === 0) {
+        resultados.innerHTML = `<p>Nenhum horário ocupado em ${formatarData(data)} para a barbearia selecionada.</p>`;
+        return;
+      }
+
+      const nomeBarbearia = agendamentos[0].barbearia_id.nome;
+
+      // Agrupar horários por barbeiro (usar primeiro nome)
+      const agrupado = {};
+      agendamentos.forEach(({ barbeiro_id, hora }) => {
+        const nomeBarbeiro = barbeiro_id.nome;
+        const primeiroNome = nomeBarbeiro.split(" ")[0];
+        if (!agrupado[primeiroNome]) agrupado[primeiroNome] = [];
+        agrupado[primeiroNome].push(hora);
+      });
+
+      resultados.innerHTML = `<h2>Agenda de ${nomeBarbearia} - ${formatarData(data)}</h2>`;
+      Object.entries(agrupado).forEach(([nomeBarbeiro, horarios]) => {
+        const div = document.createElement("div");
+        div.classList.add("agenda-item");
+        div.innerHTML = `
+          <h3>Barbeiro: ${nomeBarbeiro}</h3>
+          <span class="ocupados-label">Horários ocupados:</span>
+          <ul>
+            ${horarios
+              .map(
+                (h) =>
+                  `<li class="ocupado" title="Horário ocupado">${h}</li>`
+              )
+              .join("")}
+          </ul>
+        `;
+        resultados.appendChild(div);
+      });
+    }
+
+    // Eventos
+    barbeariaSelect.addEventListener("change", () => {
+      resultados.innerHTML = "";
+    });
+
+    dataInput.addEventListener("change", () => {
+      resultados.innerHTML = "";
+    });
+
+    consultarBtn.addEventListener("click", buscarAgenda);
+
+    // Inicialização
+    window.addEventListener("load", () => {
+      carregarBarbearias();
+    });
+  </script>
 </body>
 </html>
 
