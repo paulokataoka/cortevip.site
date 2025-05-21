@@ -1,0 +1,131 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f9f9f9;
+  color: #222;
+}
+
+.container {
+  width: 90%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+header.hero {
+  background: linear-gradient(135deg, #111, #32cd32);
+  color: #fff;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+.hero h1 span {
+  color: #32cd32;
+  font-weight: bold;
+}
+
+.hero h2 {
+  font-size: 2.8rem;
+  margin: 15px 0;
+  font-weight: bold;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin: 0 auto 30px auto;
+}
+
+.btn-whatsapp {
+  background-color: #25d366;
+  padding: 14px 30px;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.btn-whatsapp:hover {
+  background-color: #1ebf5d;
+}
+
+section.ebook {
+  background-color: #fff;
+  padding: 60px 0;
+}
+
+.ebook-flex {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 40px;
+}
+
+.ebook-img {
+  max-width: 350px;
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.ebook-info h3 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+.ebook-info ul {
+  padding-left: 20px;
+  margin-bottom: 20px;
+}
+
+.ebook-info p {
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+.btn-buy {
+  background-color: #111;
+  color: #fff;
+  padding: 12px 25px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.btn-buy:hover {
+  background-color: #333;
+}
+
+section.benefits {
+  padding: 60px 20px;
+  background-color: #eaeaea;
+  text-align: center;
+}
+
+.benefits h2 {
+  font-size: 2rem;
+  margin-bottom: 30px;
+}
+
+.benefit-list {
+  list-style: none;
+  padding: 0;
+  font-size: 1.1rem;
+  line-height: 2;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+footer {
+  background-color: #111;
+  color: #fff;
+  text-align: center;
+  padding: 25px 0;
+  font-size: 0.9rem;
+}
